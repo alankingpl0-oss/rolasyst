@@ -2,6 +2,9 @@ program RolAsyst;
 
 uses FreeCrt;
 
+const
+  wer = 1.00a
+
 var
   pole     : Real;
   zuzycie  : Real;
