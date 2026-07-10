@@ -3,7 +3,7 @@ program RolAsyst;
 uses FreeCrt;
 
 const
-  wer = 1.00a
+  wer = 1.00a;
 
 var
   pole     : Real;
@@ -19,6 +19,7 @@ begin
 { Wykradamy od u¾ytkownika cenne dane }
 
 ClrScr;
+writeln('RolAsyst v', wer'); writeln;
 write('Podaj powierzchnie swojego pola w hektarach ');
 readln(pole);
 
