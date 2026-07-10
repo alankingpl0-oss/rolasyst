@@ -1,6 +1,6 @@
 # RolAsyst
 
-<a href="https://github.com/alankingpl0-oss/PowerKilo/releases">
+<a href="https://github.com/alankingpl0-oss/rolastys/releases">
   <img src="https://img.shields.io/badge/Pobierz-PowerKilo--blue?style=plastic&icon=github" width="200" alt="Pobierz">
 </a>
 
