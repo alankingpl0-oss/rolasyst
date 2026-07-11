@@ -7,7 +7,7 @@ program RolAsyst;
 uses FreeCrt, SysUtils;
 
 const
-  wer = '1.02';
+  wer = '1.03';
 
 label
   poczatek, ZaDuzo, dalej, koniec;
@@ -39,13 +39,13 @@ ClrScr;
 writeln('RolAsyst v', wer); writeln;
 write('Podaj powierzchnie swojego pola w hektarach: ');
 readln(pole);
-if pole > 9500 then goto ZaDuzo
-else goto dalej;
+if pole > 9500 then goto ZaDuzo;
+{else continue}
 
 write('Podaj aktualna cene paliwa za litr (PLN): ');
 readln(cena_paliwa);
-if cena_paliwa > 20 then goto ZaDuzo
-else goto dalej;
+if cena_paliwa > 20 then goto ZaDuzo;
+{else continue}
 
 dalej:
 writeln;
@@ -136,17 +136,17 @@ end;
 
 { Obliczenia }
 
+{ Obliczenia }
+
 wyn_pal := pole * zuzycie;
 wyn_czas := pole / wydaj;
+wyn_koszt := wyn_pal * cena_paliwa;
 
-{ Wyczekiwany przez nas raport }
-{ Wyczekiwany przez nas raport }
 { Wyczekiwany przez nas raport }
   writeln;
   write('Nacisnij Enter, aby wygenerowac raport...');
   readln;
 
-  (* Obliczenia musza byc po 'begin', jako zwykle instrukcje *)
   g_godz := Trunc(wyn_czas);
   g_min := Round((wyn_czas - g_godz) * 60);
 
@@ -157,10 +157,15 @@ wyn_czas := pole / wydaj;
   end;
 
   ClrScr;
+
+{ Wyczekiwany przez nas raport }
+{ Wyczekiwany przez nas raport }
+{ Wyczekiwany przez nas raport }
+
   writeln('=== RAPORT ===');
   writeln('Potrzebne paliwo: .... ', wyn_pal:0:2, ' litrow');
   writeln('Potrzebny czas: ...... ', Format('%d:%.2d', [g_godz, g_min]), ' godzin');
-  writeln('Koszt paliwa: ........ ', wyn_koszt , 'przy cenie za litr PLN', cena_paliwa);
+  writeln('Koszt paliwa: ........ ', wyn_koszt:0:2, ' przy cenie za litr PLN ', cena_paliwa:0:2);
   writeln;
 
 
@@ -174,7 +179,7 @@ rewrite(plyk);
 writeln(plyk, '=== RAPORT ===');
 writeln(plyk, 'Potrzebne paliwo: .... ', wyn_pal:0:2, ' litrow');
 writeln(plyk, 'Potrzebny czas: ...... ', Format('%d:%.2d', [g_godz, g_min]), ' godzin');
-writeln(plyk, 'Koszt paliwa: ........ ', wyn_koszt , 'przy cenie za litr PLN', cena_paliwa);
+writeln(plyk, 'Koszt paliwa: ........ ', wyn_koszt:0:2 , 'przy cenie za litr PLN', cena_paliwa:0:2);
 
 (* W Pascalu kazda linia tekstu powinna byc osobnym wywolaniem writeln *)
 writeln(plyk, 'Dane te sa wyliczony do typowych prac polowych,');
