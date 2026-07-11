@@ -7,7 +7,8 @@ program RolAsyst;
 uses FreeCrt, SysUtils;
 
 const
-  wer = '1.03';
+  wer = '1.03a';
+  kompilacja = '2';
 
 label
   poczatek, ZaDuzo, dalej, koniec;
@@ -40,11 +41,19 @@ writeln('RolAsyst v', wer); writeln;
 write('Podaj powierzchnie swojego pola w hektarach: ');
 readln(pole);
 if pole > 9500 then goto ZaDuzo;
+if pole < 0.04 then writeln('A wiec to tylko przydomowy ogrodek?');
+if pole < 0.00001 then
+  begin
+    writeln('Nie. Tym razem zwaliles to koncertowo.'); {Jasno potwirdzamy, że wszystko zostało zwalone.}
+    readln;
+    goto poczatek;
+  end;
 {else continue}
 
 write('Podaj aktualna cene paliwa za litr (PLN): ');
 readln(cena_paliwa);
 if cena_paliwa > 20 then goto ZaDuzo;
+if cena_paliwa < 3 then writeln('Co tak malo?!');
 {else continue}
 
 dalej:
@@ -53,6 +62,7 @@ writeln('=== WYBOR CIAGNIKA ===');
 writeln('1. Ursus C-330');
 writeln('2. Ursus C-360');
 writeln('3. Zetor 7211');
+writeln('4. Claas Axion Terra Trac');
 writeln('0. Inny (wpisz dane recznie)');
 writeln;
 write('Wybierz ciagnik (1-3, 0): ');
@@ -117,6 +127,35 @@ case wybor of
        end;
      end;
        (* Klasyczna sciezka - reczne wpisywanie *)
+
+    4: begin
+       writeln('=== Praca dla Claas Axion 9 Terra Trac (448 KM) ===');
+       writeln('1. Lekka orka (5 metrow)');
+       writeln('2. Ciezka orka (13 metrow)');
+       writeln('3. Siew (agregat 3 m)');
+       writeln('4. Siew (agregat 8 m)');
+       writeln('5. Koszenie trawy 6 m');
+       write('Wybierz rodzaj pracy (1-5): ');
+       readln(wybor_prac);
+       
+       case wybor_prac of
+         1: begin zuzycie := 22.2; wydaj := 5.5; end;
+         2: begin zuzycie := 34.7; wydaj := 8.3; end;
+         3: begin zuzycie := 9.1; wydaj := 2.5; end;
+         4: begin zuzycie := 14.4; wydaj := 5.1; end;
+         5: begin zuzycie := 7; wydaj := 9.6; end;
+         
+         else
+           begin
+             writeln('Nieznana praca! Ustawiam srednie parametry.');
+             zuzycie := 12.1; wydaj := 3.0;
+           end;
+       end;
+     end;
+
+  41: begin
+       writeln('Wersja ', wer, 'kompilacja ', kompilacja);
+       end;
 
   0: begin
        (* Klasyczna sciezka - reczne wpisywanie *)
