@@ -7,10 +7,10 @@ program RolAsyst;
 uses FreeCrt;
 
 const
-  wer = '1.01';
+  wer = '1.02';
 
 label
-  poczatek, koniec;
+  poczatek, ZaDuzo, dalej, koniec;
 
 var
   pole     : Real;
@@ -33,7 +33,10 @@ ClrScr;
 writeln('RolAsyst v', wer); writeln;
 write('Podaj powierzchnie swojego pola w hektarach: ');
 readln(pole);
+if pole > 9500 then goto ZaDuzo
+else goto dalej;
 
+dalej:
 writeln;
 writeln('=== WYBOR CIAGNIKA ===');
 writeln('1. Ursus C-330');
@@ -127,6 +130,12 @@ else
 
 (* else goto koniec *)
 
+ZaDuzo:
+writeln('To niemozliwe.');
+readln;
+goto poczatek;
+
 koniec:
 writeln('Dziekujemy za skorzystanie z programu RolAsyst w wersji ', wer);
+
 end.
