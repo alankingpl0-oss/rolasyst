@@ -1,0 +1,7 @@
+=== RAPORT ===
+Potrzebne paliwo: .... 5272.50 litrow
+Potrzebny czas: ...... 555.00 godzin
+Dane te sa wyliczony do typowych prac polowych,
+jednak przy ciezkiej orce czy gliniastej
+glebie zuzycie i wydajnosc moze spasc
+
