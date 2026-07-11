@@ -267,20 +267,33 @@ else
 
 (* else goto koniec *)
 
-{
+
 ZaDuzo:
 writeln('To niemozliwe.');
 readln;
 goto poczatek;
-}
+
 { MENU DEBUG }
 
 debug:
   writeln('=== MENU DEBUG ===');
   writeln('v', wer, ' kompil', kompilacja);
-  (* Na razie tyle w menu debug. Lepiej zostawić tą opcję
-   * 41 w menu wyboru ciągników,
-   * żeby nic nie zwalić koncertowo... *)
+  writeln('1. Iinformacje o wersji');
+  writeln('0. Powrot');
+  readln(debug_wybor);
+  if debug_wybor = 0 then goto poczatek;
+  if debug_wybor = 1 then
+    begin
+      ClrScr;
+      writeln('Wersja ', wer, ', kompilacja ', kompilacja, '.');
+      readln;
+      ClrScr;
+      goto debug;
+    end;
+  
+    (* Na razie tyle w menu debug. Lepiej zostawić tą opcję
+     * 41 w menu wyboru ciągników,
+     * żeby nic nie zwalić koncertowo... *)
   readln;
 
 koniec:
