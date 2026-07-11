@@ -19,6 +19,7 @@ label
   koniec,
   debug;
 
+
 var
   pole     : Real;
   zuzycie  : Real;
