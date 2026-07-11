@@ -6,14 +6,30 @@ def oblicz():
         pred = float(entry_pred.get())
         wsp  = float(entry_wsp.get())
         spalanie_h = float(entry_spalanie.get())
+        masa_narzedzia = float(entry_masa.get())
 
-        # Obliczanie wydajności powierzchniowej (ha/h)
+        """
+        Najpierw obliczamy realne spalanie godzinowe ciągnika, 
+        biorąc pod uwagę opór i masę podłączonego sprzętu.
+        Zakładamy, że każda tona masy narzędzia dorzuca 2.0 l/h do bazowego spalania.
+        """
+        dodatkowe_spalanie = (masa_narzedzia / 1000.0) * 2.0
+        realne_spalanie_h = spalanie_h + dodatkowe_spalanie
+
+        """
+        Obliczanie wydajności powierzchniowej (ha/h)
+        Zgodnie ze standardowym wzorem agrotechnicznym.
+        """
         wydajnosc = (szer * pred * wsp) / 10
         
-        # Obliczanie zużycia paliwa na hektar (l/ha)
-        # Spalanie godzinowe dzielimy przez wydajność (ile ha zrobimy w godzinę)
+        """
+        Obliczanie zużycia paliwa na hektar (l/ha)
+        Spalanie godzinowe (uwzględniające masę) dzielimy przez wydajność.
+        Jeżeli coś pójdzie nie tak z parametrami geometrycznymi, 
+        można koncertowo zwalić dzielenie przez zero, dlatego sprawdzamy warunek.
+        """
         if wydajnosc > 0:
-            spalanie_ha = spalanie_h / wydajnosc
+            spalanie_ha = realne_spalanie_h / wydajnosc
             label_paliwo.config(text=f"Zużycie paliwa: {spalanie_ha:.2f} l/ha")
         else:
             label_paliwo.config(text="Zużycie paliwa: błąd (wydajność = 0)")
@@ -39,18 +55,20 @@ tk.Label(root, text="Współczynnik (0.6–0.8):").grid(row=2, column=0)
 entry_wsp = tk.Entry(root)
 entry_wsp.grid(row=2, column=1)
 
-# Nowe pole na bazowe spalanie ciągnika
-tk.Label(root, text="Zużycie paliwa [l/h]:").grid(row=3, column=0)
+tk.Label(root, text="Zużycie paliwa (baza) [l/h]:").grid(row=3, column=0)
 entry_spalanie = tk.Entry(root)
 entry_spalanie.grid(row=3, column=1)
 
-tk.Button(root, text="Oblicz", command=oblicz).grid(row=4, column=0, columnspan=2)
+tk.Label(root, text="Masa narzędzia [kg]:").grid(row=4, column=0)
+entry_masa = tk.Entry(root)
+entry_masa.grid(row=4, column=1)
+
+tk.Button(root, text="Oblicz", command=oblicz).grid(row=5, column=0, columnspan=2)
 
 label_wynik = tk.Label(root, text="Wydajność: ---")
-label_wynik.grid(row=5, column=0, columnspan=2)
+label_wynik.grid(row=6, column=0, columnspan=2)
 
-# Nowa etykieta na wynik zużycia na hektar
 label_paliwo = tk.Label(root, text="Zużycie paliwa: ---")
-label_paliwo.grid(row=6, column=0, columnspan=2)
+label_paliwo.grid(row=7, column=0, columnspan=2)
 
 root.mainloop()

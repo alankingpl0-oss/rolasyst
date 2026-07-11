@@ -87,6 +87,7 @@ writeln('1. Ursus C-330');
 writeln('2. Ursus C-360');
 writeln('3. Zetor 7211');
 writeln('4. Claas Axion Terra Trac');
+writeln('5. Zetor Crystal 160');
 writeln('0. Inny (wpisz dane recznie)');
 writeln;
 write('Wybierz ciagnik (1-3, 0): ');
@@ -182,6 +183,30 @@ case wybor of
   41: begin
        writeln('Wersja ', wer, 'kompilacja ', kompilacja);
        end;
+
+  5:  begin
+       writeln('=== Praca dla Crystal 160 ===');
+       writeln('1. Lekka orka (5 metrow)');
+       writeln('2. Nawozenie');
+       writeln('3. Siew (agregat 3 m)');
+       writeln('4. Koszenie trawy 6 m');
+       write('Wybierz rodzaj pracy (1-4): ');
+       readln(wybor_prac);
+       
+       case wybor_prac of
+         1: begin zuzycie := 4.85  ; wydaj := 2.72; end;
+         2: begin zuzycie := 7.01  ; wydaj := 2.43; end;
+         3: begin zuzycie := 14.65 ; wydaj := 1.42; end;
+         4: begin zuzycie := 2.22  ; wydaj := 9.43; end;
+         
+         else
+           begin
+             writeln('Nieznana praca! Ustawiam srednie parametry.');
+             zuzycie := 12.1; wydaj := 3.0;
+           end;
+       end;
+     end;
+
 
   0: begin
        (* Klasyczna sciezka - reczne wpisywanie *)
