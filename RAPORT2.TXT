@@ -1,0 +1,5 @@
+=== RAPORT ===
+Potrzebne paliwo: .... 6.50 litrow
+Potrzebny czas: ...... 1 godz 26 min
+Koszt paliwa: ........ 42.25 PLN
+Dane te sa wyliczone do typowych prac polowych.
