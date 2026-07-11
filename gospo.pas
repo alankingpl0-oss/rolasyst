@@ -4,14 +4,20 @@ program RolAsyst;
  * Glowny (i jedyny) plik programu.
  *)
 
-uses FreeCrt, SysUtils;
+uses
+  FreeCrt,
+  SysUtils;
 
 const
   wer = '1.03a';
   kompilacja = '2';
 
 label
-  poczatek, ZaDuzo, dalej, koniec;
+  poczatek,
+  ZaDuzo,
+  dalej,
+  koniec,
+  debug;
 
 var
   pole     : Real;
@@ -26,6 +32,7 @@ var
   cena_paliwa : Real;
   wyn_koszt: Real;
   wybor_prac:Integer;
+  debug_wybor:Integer;
 
 
   g_godz, g_min : Integer;
@@ -40,7 +47,15 @@ ClrScr;
 writeln('RolAsyst v', wer); writeln;
 write('Podaj powierzchnie swojego pola w hektarach: ');
 readln(pole);
-if pole > 9500 then goto ZaDuzo;
+if pole = 2012 then
+  begin
+    ClrScr;
+    goto debug
+  end;
+if pole > 9500 then
+  begin
+    writeln('')
+  end;
 if pole < 0.04 then writeln('A wiec to tylko przydomowy ogrodek?');
 if pole < 0.00001 then
   begin
@@ -52,8 +67,16 @@ if pole < 0.00001 then
 
 write('Podaj aktualna cene paliwa za litr (PLN): ');
 readln(cena_paliwa);
-if cena_paliwa > 20 then goto ZaDuzo;
-if cena_paliwa < 3 then writeln('Co tak malo?!');
+if cena_paliwa > 20 then
+  begin
+    writeln('Troche za duzo.');
+    goto poczatek
+  end;
+if cena_paliwa < 3 then
+  begin
+    writeln('Co tak malo?!');
+    writeln('Na prawde tak tanio Ci dali paliwo?');
+  end;
 {else continue}
 
 dalej:
@@ -68,6 +91,8 @@ writeln;
 write('Wybierz ciagnik (1-3, 0): ');
 readln(wybor);
 
+{ Wybory }
+
 case wybor of
   1: begin
        writeln('=== WYBOR PRACY DLA URSUSA C-330 ===');
@@ -76,7 +101,7 @@ case wybor of
        writeln('3. Orka lekka (plug 2-skibowy)');
        write('Wybierz rodzaj pracy (1-3): ');
        readln(wybor_prac);
-       
+       {Wybory prac}
        case wybor_prac of
          1: begin zuzycie := 5.0; wydaj := 0.9; end;
          2: begin zuzycie := 6.5; wydaj := 0.7; end;
@@ -223,7 +248,7 @@ writeln(plyk, 'Koszt paliwa: ........ ', wyn_koszt:0:2 , 'przy cenie za litr PLN
 (* W Pascalu kazda linia tekstu powinna byc osobnym wywolaniem writeln *)
 writeln(plyk, 'Dane te sa wyliczony do typowych prac polowych,');
 writeln(plyk, 'jednak przy ciezkiej orce czy gliniastej');
-writeln(plyk, 'glebie zuzycie i wydajnosc moze spasc');
+writeln(plyk, 'glebie zuzycie i wydajnosc moze ulec zmianie');
 
 writeln(plyk); (* Jesli pusty wiersz mial byc w pliku, musisz przekazac zmienna plikowa *)
 close(plyk);
@@ -242,10 +267,21 @@ else
 
 (* else goto koniec *)
 
+{
 ZaDuzo:
 writeln('To niemozliwe.');
 readln;
 goto poczatek;
+}
+{ MENU DEBUG }
+
+debug:
+  writeln('=== MENU DEBUG ===');
+  writeln('v', wer, ' kompil', kompilacja);
+  (* Na razie tyle w menu debug. Lepiej zostawić tą opcję
+   * 41 w menu wyboru ciągników,
+   * żeby nic nie zwalić koncertowo... *)
+  readln;
 
 koniec:
 writeln('Dziekujemy za skorzystanie z programu RolAsyst w wersji ', wer);

@@ -1,0 +1,8 @@
+=== RAPORT ===
+Potrzebne paliwo: .... 1.01 litrow
+Potrzebny czas: ...... 0:13 godzin
+Koszt paliwa: ........ 0.00przy cenie za litr PLN0.00
+Dane te sa wyliczony do typowych prac polowych,
+jednak przy ciezkiej orce czy gliniastej
+glebie zuzycie i wydajnosc moze ulec zmianie
+
