@@ -12,3 +12,6 @@ Program wygeneruje raport, który można też sobie zapisać od pliku (musimy wp
 
 # Binarki
 Na razie **_niestety_** tylko na Windows. Zachęcam do tworzenia portów na Linuksa.
+
+# Licencja
+Wyłącznie **GNU is Not Unix General Public Licencje, wersja 3.0** z 2007 roku, aby zapewnić stuprocentową wolność programu i ochronę przez oprogramowaniem własnościowym.
