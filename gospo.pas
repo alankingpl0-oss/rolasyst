@@ -9,6 +9,9 @@ uses FreeCrt;
 const
   wer = '1.01';
 
+label
+  poczatek, koniec;
+
 var
   pole     : Real;
   zuzycie  : Real;
@@ -18,9 +21,13 @@ var
   plyk     : Text;
   nazwa_pl : String;
   wybor    : Integer; (* Zmienna do obslugi menu ciagnikow *)
+  wybo2    : Char;
+
 
 begin
 { Wykradamy od uzytkownika cenne dane }
+
+poczatek:
 
 ClrScr;
 writeln('RolAsyst v', wer); writeln;
@@ -87,9 +94,10 @@ writeln('=== RAPORT ===');
 writeln('Potrzebne paliwo: .... ', wyn_pal:0:2, ' litrow');
 writeln('Potrzebny czas: ...... ', wyn_czas:0:2, ' godzin');
 writeln;
-write('Do jakiego pliku zapisac? ');
+write('Do jakiego pliku zapisac? (lub ''n'' aby nie zapisywac) ');
 readln(nazwa_pl); (* Zmieniono na readln, zeby nie bylo problemow z buforem *)
 if nazwa_pl = '' then nazwa_pl := 'RAPORT.TXT';
+if nazwa_pl = 'n' then goto koniec;
 
 assign(plyk, nazwa_pl);
 rewrite(plyk);
@@ -107,5 +115,10 @@ close(plyk);
 
 
 writeln('Raport zapisany do pliku ', nazwa_pl);
-readln;
+writeln('Czy chcesz wyjsc z programu (t/n)')
+readln('n')
+else goto koniec
+
+koniec:
+writeln('Dziekujemy za skorzystanie z programu RolAsyst w wersji ', 'wer');
 end.
