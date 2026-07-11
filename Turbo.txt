@@ -1,0 +1,3 @@
+=== RAPORT ===
+Potrzebne paliwo: .... 855.00 litrow
+Potrzebny czas: ...... 90.00 godzin

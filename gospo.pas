@@ -1,7 +1,7 @@
 program RolAsyst;
 
 (* gospo.pas
- * G³ówny (i jedyny) plik programu.
+ * Glowny (i jedyny) plik programu.
  *)
 
 uses FreeCrt;
@@ -17,10 +17,10 @@ var
   wydaj    : Real;
   plyk     : Text;
   nazwa_pl : String;
-  wybor    : Integer; (* Zmienna do obs³ugi menu ci¹gników *)
+  wybor    : Integer; (* Zmienna do obslugi menu ciagnikow *)
 
 begin
-{ Wykradamy od u¿ytkownika cenne dane }
+{ Wykradamy od uzytkownika cenne dane }
 
 ClrScr;
 writeln('RolAsyst v', wer); writeln;
@@ -32,7 +32,7 @@ writeln('=== WYBOR CIAGNIKA ===');
 writeln('1. Ursus C-330');
 writeln('2. Ursus C-360');
 writeln('3. Zetor 7211');
-writeln('0. Inny (wpisz dane rêcznie)');
+writeln('0. Inny (wpisz dane recznie)');
 writeln;
 write('Wybierz ciagnik (1-3, 0): ');
 readln(wybor);
@@ -40,25 +40,25 @@ readln(wybor);
 case wybor of
   1: begin
        (* Dane techniczne dla Ursusa C-330 *)
-       zuzycie := 6.5;  (* Œrednie spalanie l/ha w lekkiej pracy *)
-       wydaj := 0.7;    (* Wydajnoœæ ha/h *)
+       zuzycie := 6.5;  (* srednie spalanie l/ha w lekkiej pracy *)
+       wydaj := 0.7;    (* Wydajnoosc ha/h *)
        writeln('Wybrano: Ursus C-330 (Spalanie: 6.5 l/ha, Wydajnosc: 0.7 ha/h)');
      end;
   2: begin
        (* Dane techniczne dla Ursusa C-360 *)
-       zuzycie := 9.5;  (* Œrednie spalanie l/ha *)
-       wydaj := 1.0;    (* Wydajnoœæ ha/h *)
+       zuzycie := 9.5;  (* srednie spalanie l/ha *)
+       wydaj := 1.0;    (* Wydajnosc ha/h *)
        writeln('Wybrano: Ursus C-360 (Spalanie: 9.5 l/ha, Wydajnosc: 1.0 ha/h)');
      end;
   3: begin
        (* Dane techniczne dla Zetora 7211 *)
-       zuzycie := 11.0; (* Wiêkszy komfort, to i spaliæ musi *)
-       wydaj := 1.2;    (* Wydajnoœæ ha/h *)
+       zuzycie := 11.0; (* Wiekszy komfort, to i spalic musi *)
+       wydaj := 1.2;    (* Wydajnosc ha/h *)
        writeln('Wybrano: Zetor 7211 (Spalanie: 11.0 l/ha, Wydajnosc: 1.2 ha/h)');
      end;
   0: begin
-       (* Klasyczna œcie¿ka - rêczne wpisywanie *)
-       writeln('Wybrano konfiguracjê rêczn¹.');
+       (* Klasyczna sciezka - reczne wpisywanie *)
+       writeln('Wybrano konfiguracje reczna.');
        write('Podaj zuzycie paliwa ciagnika (litry na hektar): ');
        readln(zuzycie);
        write('Podaj wydajnosc pracy (hektary na godzine): ');
@@ -88,15 +88,23 @@ writeln('Potrzebne paliwo: .... ', wyn_pal:0:2, ' litrow');
 writeln('Potrzebny czas: ...... ', wyn_czas:0:2, ' godzin');
 writeln;
 write('Do jakiego pliku zapisac? ');
-readln(nazwa_pl); (* Zmieniono na readln, ¿eby nie by³o problemow z buforem *)
+readln(nazwa_pl); (* Zmieniono na readln, zeby nie bylo problemow z buforem *)
+if nazwa_pl = '' then nazwa_pl := 'RAPORT.TXT';
 
 assign(plyk, nazwa_pl);
 rewrite(plyk);
-
 writeln(plyk, '=== RAPORT ===');
 writeln(plyk, 'Potrzebne paliwo: .... ', wyn_pal:0:2, ' litrow');
 writeln(plyk, 'Potrzebny czas: ...... ', wyn_czas:0:2, ' godzin');
+
+(* W Pascalu kazda linia tekstu powinna byc osobnym wywolaniem writeln *)
+writeln(plyk, 'Dane te sa wyliczony do typowych prac polowych,');
+writeln(plyk, 'jednak przy ciezkiej orce czy gliniastej');
+writeln(plyk, 'glebie zuzycie i wydajnosc moze spasc');
+
+writeln(plyk); (* Jesli pusty wiersz mial byc w pliku, musisz przekazac zmienna plikowa *)
 close(plyk);
+
 
 writeln('Raport zapisany do pliku ', nazwa_pl);
 readln;
