@@ -115,10 +115,18 @@ close(plyk);
 
 
 writeln('Raport zapisany do pliku ', nazwa_pl);
-writeln('Czy chcesz wyjsc z programu (t/n)')
-readln('n')
-else goto koniec
+writeln('Czy chcesz wyjsc z programu (t/n)');
+readln(wybo2);
+if wybo2 = 't' then
+  goto koniec
+else
+  begin
+    goto poczatek
+  end;
+
+
+(* else goto koniec *)
 
 koniec:
-writeln('Dziekujemy za skorzystanie z programu RolAsyst w wersji ', 'wer');
+writeln('Dziekujemy za skorzystanie z programu RolAsyst w wersji ', wer);
 end.
