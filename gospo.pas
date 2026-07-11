@@ -4,7 +4,7 @@ program RolAsyst;
  * Glowny (i jedyny) plik programu.
  *)
 
-uses FreeCrt;
+uses FreeCrt, SysUtils;
 
 const
   wer = '1.02';
@@ -22,6 +22,12 @@ var
   nazwa_pl : String;
   wybor    : Integer; (* Zmienna do obslugi menu ciagnikow *)
   wybo2    : Char;
+  cena_paliwa : Real;
+  wyn_koszt: Real;
+  wybor_prac:Integer;
+
+
+  g_godz, g_min : Integer;
 
 
 begin
@@ -34,6 +40,11 @@ writeln('RolAsyst v', wer); writeln;
 write('Podaj powierzchnie swojego pola w hektarach: ');
 readln(pole);
 if pole > 9500 then goto ZaDuzo
+else goto dalej;
+
+write('Podaj aktualna cene paliwa za litr (PLN): ');
+readln(cena_paliwa);
+if cena_paliwa > 20 then goto ZaDuzo
 else goto dalej;
 
 dalej:
@@ -49,23 +60,64 @@ readln(wybor);
 
 case wybor of
   1: begin
-       (* Dane techniczne dla Ursusa C-330 *)
-       zuzycie := 6.5;  (* srednie spalanie l/ha w lekkiej pracy *)
-       wydaj := 0.7;    (* Wydajnoosc ha/h *)
-       writeln('Wybrano: Ursus C-330 (Spalanie: 6.5 l/ha, Wydajnosc: 0.7 ha/h)');
+       writeln('=== WYBOR PRACY DLA URSUSA C-330 ===');
+       writeln('1. Lekka kultywacja / Bronowanie');
+       writeln('2. Koszenie kosiarka rotacyjna');
+       writeln('3. Orka lekka (plug 2-skibowy)');
+       write('Wybierz rodzaj pracy (1-3): ');
+       readln(wybor_prac);
+       
+       case wybor_prac of
+         1: begin zuzycie := 5.0; wydaj := 0.9; end;
+         2: begin zuzycie := 6.5; wydaj := 0.7; end;
+         3: begin zuzycie := 8.5; wydaj := 0.4; end;
+         else
+           begin
+             writeln('Nieznana praca! Ustawiam srednie parametry.');
+             zuzycie := 6.5; wydaj := 0.7;
+           end;
+       end;
      end;
   2: begin
-       (* Dane techniczne dla Ursusa C-360 *)
-       zuzycie := 9.5;  (* srednie spalanie l/ha *)
-       wydaj := 1.0;    (* Wydajnosc ha/h *)
-       writeln('Wybrano: Ursus C-360 (Spalanie: 9.5 l/ha, Wydajnosc: 1.0 ha/h)');
+       writeln('=== WYBOR PRACY DLA URSUSA C-360 ===');
+       writeln('1. Bronowanie / Siew');
+       writeln('2. Praca z prasa zwijajaca');
+       writeln('3. Orka (plug 3-skibowy)');
+       write('Wybierz rodzaj pracy (1-3): ');
+       readln(wybor_prac);
+       
+       case wybor_prac of
+         1: begin zuzycie := 7.0; wydaj := 1.4; end;
+         2: begin zuzycie := 9.5; wydaj := 1.0; end;
+         3: begin zuzycie := 12.5; wydaj := 0.6; end;
+         else
+           begin
+             writeln('Nieznana praca! Ustawiam srednie parametry.');
+             zuzycie := 9.5; wydaj := 1.0;
+           end;
+       end;
      end;
   3: begin
-       (* Dane techniczne dla Zetora 7211 *)
-       zuzycie := 11.0; (* Wiekszy komfort, to i spalic musi *)
-       wydaj := 1.2;    (* Wydajnosc ha/h *)
-       writeln('Wybrano: Zetor 7211 (Spalanie: 11.0 l/ha, Wydajnosc: 1.2 ha/h)');
+       writeln('=== WYBOR PRACY DLA ZETORA 7211 ===');
+       writeln('1. Siewnik / Lekka uprawa');
+       writeln('2. Prace transportowe');
+       writeln('3. Orka gleboka');
+       write('Wybierz rodzaj pracy (1-3): ');
+       readln(wybor_prac);
+       
+       case wybor_prac of
+         1: begin zuzycie := 8.5; wydaj := 1.6; end;
+         2: begin zuzycie := 10.0; wydaj := 1.5; end;
+         3: begin zuzycie := 14.0; wydaj := 0.8; end;
+         else
+           begin
+             writeln('Nieznana praca! Ustawiam srednie parametry.');
+             zuzycie := 11.0; wydaj := 1.2;
+           end;
+       end;
      end;
+       (* Klasyczna sciezka - reczne wpisywanie *)
+
   0: begin
        (* Klasyczna sciezka - reczne wpisywanie *)
        writeln('Wybrano konfiguracje reczna.');
@@ -88,15 +140,30 @@ wyn_pal := pole * zuzycie;
 wyn_czas := pole / wydaj;
 
 { Wyczekiwany przez nas raport }
-writeln;
-write('Nacisnij Enter, aby wygenerowac raport...');
-readln;
+{ Wyczekiwany przez nas raport }
+{ Wyczekiwany przez nas raport }
+  writeln;
+  write('Nacisnij Enter, aby wygenerowac raport...');
+  readln;
 
-ClrScr;
-writeln('=== RAPORT ===');
-writeln('Potrzebne paliwo: .... ', wyn_pal:0:2, ' litrow');
-writeln('Potrzebny czas: ...... ', wyn_czas:0:2, ' godzin');
-writeln;
+  (* Obliczenia musza byc po 'begin', jako zwykle instrukcje *)
+  g_godz := Trunc(wyn_czas);
+  g_min := Round((wyn_czas - g_godz) * 60);
+
+  if g_min = 60 then
+  begin
+    g_min := 0;
+    g_godz := g_godz + 1;
+  end;
+
+  ClrScr;
+  writeln('=== RAPORT ===');
+  writeln('Potrzebne paliwo: .... ', wyn_pal:0:2, ' litrow');
+  writeln('Potrzebny czas: ...... ', Format('%d:%.2d', [g_godz, g_min]), ' godzin');
+  writeln('Koszt paliwa: ........ ', wyn_koszt , 'przy cenie za litr PLN', cena_paliwa);
+  writeln;
+
+
 write('Do jakiego pliku zapisac? (lub ''n'' aby nie zapisywac) ');
 readln(nazwa_pl); (* Zmieniono na readln, zeby nie bylo problemow z buforem *)
 if nazwa_pl = '' then nazwa_pl := 'RAPORT.TXT';
@@ -106,7 +173,8 @@ assign(plyk, nazwa_pl);
 rewrite(plyk);
 writeln(plyk, '=== RAPORT ===');
 writeln(plyk, 'Potrzebne paliwo: .... ', wyn_pal:0:2, ' litrow');
-writeln(plyk, 'Potrzebny czas: ...... ', wyn_czas:0:2, ' godzin');
+writeln(plyk, 'Potrzebny czas: ...... ', Format('%d:%.2d', [g_godz, g_min]), ' godzin');
+writeln(plyk, 'Koszt paliwa: ........ ', wyn_koszt , 'przy cenie za litr PLN', cena_paliwa);
 
 (* W Pascalu kazda linia tekstu powinna byc osobnym wywolaniem writeln *)
 writeln(plyk, 'Dane te sa wyliczony do typowych prac polowych,');
