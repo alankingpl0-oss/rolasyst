@@ -79,6 +79,33 @@ if pra_st = 0 then writeln('Czyli klasyka');
   end;
 }
 
+if pra_st >= 250 then
+  begin
+    writeln('Nie. Nie, lepiej znajdz innego pracownika.');
+    writeln('Nie wolisz wydac tych pieniadze na cos lepsze?');
+    readln;
+    goto poczatek;
+  end;
+
+if pra_st > 140 then
+  begin
+    writeln('Troche duzo... Nie szkoda Ci tych pieniedzy?');
+    readln;
+  end;
+
+if pra_st < 30 then
+  begin
+    writeln('TO SIE NAPRAWDE OPLACA!');
+    readln;
+  end;
+  
+
+if pra_st < 70 then
+  begin
+    writeln('To sie oplaca.');
+  end;
+
+
 
 write('Podaj aktualna cene paliwa za litr (PLN): ');
 readln(cena_paliwa);
