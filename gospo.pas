@@ -9,8 +9,8 @@ uses
   SysUtils;
 
 const
-  wer = '1.05.1';
-  kompilacja = '1';
+  wer = '1.06';
+  kompilacja = '0';
 
 label
   poczatek,
@@ -34,6 +34,10 @@ var
   wyn_koszt: Real;
   wybor_prac:Integer;
   debug_wybor:Integer;
+  pra_st   : Real;
+  wyn_prac : Real;
+  wyn_sur  : Real;
+  wyn_ost  : Real;
 
 
   g_godz, g_min : Integer;
@@ -68,6 +72,7 @@ if pole < 0.00001 then
 
 write('Czy wynajmujesz pracownika? Jezeli tak, wpisz stawke za godzine. Jezeli nie = przeklikaj enterem. ');
 readln(pra_st); (* Pra_st to skrót od "PRAcownik STawka".*)
+
 
 write('Podaj aktualna cene paliwa za litr (PLN): ');
 readln(cena_paliwa);
@@ -259,6 +264,9 @@ end;
 wyn_pal := pole * zuzycie;
 wyn_czas := pole / wydaj;
 wyn_koszt := wyn_pal * cena_paliwa;
+wyn_prac := pra_st * wyn_czas;
+wyn_sur := wyn_prac + wyn_koszt;
+wyn_ost := wyn_sur * 1.10;
 
 { Wyczekiwany przez nas raport }
   writeln;
@@ -281,9 +289,11 @@ wyn_koszt := wyn_pal * cena_paliwa;
 { Wyczekiwany przez nas raport }
 
   writeln('=== RAPORT ===');
-  writeln('Potrzebne paliwo: .... ', wyn_pal:0:2, ' litrow');
-  writeln('Potrzebny czas: ...... ', Format('%d:%.2d', [g_godz, g_min]), ' godzin');
-  writeln('Koszt paliwa: ........ ', wyn_koszt:0:2, ' przy cenie za litr PLN ', cena_paliwa:0:2);
+  writeln('Potrzebne paliwo: .............................. ', wyn_pal:0:2, ' litrow');
+  writeln('Potrzebny czas: ................................ ', Format('%d:%.2d', [g_godz, g_min]), ' godzin');
+  writeln('Koszt paliwa: .................................. ', wyn_koszt:0:2, ' przy cenie za litr PLN ', cena_paliwa:0:2);
+  writeln('Pracownik: ............................... ', wyn_prac:0:2 , ' zl');
+  writeln('Ostateczny koszt (w tym ukryte koszty): ........ ', wyn_ost:0:2 , ' zl');
   writeln;
 
 
@@ -295,9 +305,13 @@ if nazwa_pl = 'n' then goto koniec;
 assign(plyk, nazwa_pl);
 rewrite(plyk);
 writeln(plyk, '=== RAPORT ===');
-writeln(plyk, 'Potrzebne paliwo: .... ', wyn_pal:0:2, ' litrow');
-writeln(plyk, 'Potrzebny czas: ...... ', Format('%d:%.2d', [g_godz, g_min]), ' godzin');
-writeln(plyk, 'Koszt paliwa: ........ ', wyn_koszt:0:2 , 'przy cenie za litr PLN', cena_paliwa:0:2);
+writeln(plyk, 'Potrzebne paliwo: ........................ ', wyn_pal:0:2, ' litrow');
+writeln(plyk, 'Potrzebny czas: .......................... ', Format('%d:%.2d', [g_godz, g_min]), ' godzin');
+writeln(plyk, 'Koszt paliwa: ............................ ', wyn_koszt:0:2 , 'przy cenie za litr PLN', cena_paliwa:0:2);
+writeln(plyk, 'Pracownik: .. ............................ ', wyn_prac:0:2 , ' zl');
+writeln(plyk, 'Ostateczny koszt (w tym ukryte koszty): .. ', wyn_ost:0:2 , ' zl');
+
+
 
 (* W Pascalu kazda linia tekstu powinna byc osobnym wywolaniem writeln *)
 writeln(plyk, 'Dane te sa wyliczony do typowych prac polowych,');
