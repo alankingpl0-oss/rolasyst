@@ -82,7 +82,7 @@ if pra_st = 0 then writeln('Czyli klasyka');
 if pra_st >= 250 then
   begin
     writeln('Nie. Nie, lepiej znajdz innego pracownika.');
-    writeln('Nie wolisz wydac tych pieniadze na cos lepsze?');
+    writeln('Nie wolisz wydac tych pieniedzy na cos lepszego?');
     readln;
     goto poczatek;
   end;
@@ -351,7 +351,7 @@ writeln(plyk, 'Dane te sa wyliczony do typowych prac polowych,');
 writeln(plyk, 'jednak przy ciezkiej orce czy gliniastej');
 writeln(plyk, 'glebie zuzycie i wydajnosc moze ulec zmianie');
 
-writeln(plyk); (* Jesli pusty wiersz mial byc w pliku, musisz przekazac zmienna plikowa *)
+writeln(plyk); (* Jesli pusty wiersz mial byc w pliku, musimy przekazac zmienna plikowa *)
 close(plyk);
 
 
