@@ -16,4 +16,6 @@ Program wygeneruje raport, który można też sobie zapisać od pliku (musimy wp
 **Już na Linux!!** Można pobierać bez obaw o to, że używasz przereklamowanego systemu opercayjnego.
 
 # Licencja
-Wyłącznie **GNU is Not Unix General Public Licencje, wersja 3.0** z 2007 roku, aby zapewnić stuprocentową wolność programu i ochronę przez oprogramowaniem własnościowym.
+Wyłącznie **GNU is Not Unix General Public License, wersja 3.0** z 2007 roku, aby zapewnić stuprocentową wolność programu i ochronę przez oprogramowaniem własnościowym.
+
+# W stu procentach wolne oprogramowanie.
