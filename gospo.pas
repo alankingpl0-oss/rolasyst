@@ -9,8 +9,8 @@ uses
   SysUtils;
 
 const
-  wer = '1.06';
-  kompilacja = '0';
+  wer = '1.06.1';
+  kompilacja = '1';
 
 label
   poczatek,
@@ -70,8 +70,14 @@ if pole < 0.00001 then
   end;
 {else continue}
 
-write('Czy wynajmujesz pracownika? Jezeli tak, wpisz stawke za godzine. Jezeli nie = przeklikaj enterem. ');
+write('Czy wynajmujesz pracownika? Jezeli tak, wpisz stawke za godzine. (jesli nie, wpisz 0) ');
 readln(pra_st); (* Pra_st to skrót od "PRAcownik STawka".*)
+if pra_st = 0 then writeln('Czyli klasyka');
+ { begin
+    writeln('Czyli robisz klasycznie.');
+    
+  end;
+}
 
 
 write('Podaj aktualna cene paliwa za litr (PLN): ');
