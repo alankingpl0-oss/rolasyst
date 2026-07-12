@@ -9,8 +9,8 @@ uses
   SysUtils;
 
 const
-  wer = '1.03.3';
-  kompilacja = '3';
+  wer = '1.05';
+  kompilacja = '0';
 
 label
   poczatek,
@@ -88,6 +88,7 @@ writeln('2. Ursus C-360');
 writeln('3. Zetor 7211');
 writeln('4. Claas Axion Terra Trac');
 writeln('5. Zetor Crystal 160');
+writeln('6. Mercedes MB-Trac 800');
 writeln('0. Inny (wpisz dane recznie)');
 writeln;
 write('Wybierz ciagnik (1-3, 0): ');
@@ -206,6 +207,30 @@ case wybor of
            end;
        end;
      end;
+
+  6:  begin
+       writeln('=== Praca dla MB-Trac 800 ===');
+       writeln('1. Wciaganie drzewa 600 kg');
+       writeln('2. Wciganie drzewa 900 kg');
+       writeln('3. Siew (agregat 3 m)');
+       writeln('4. Gleboka orka 5 m');
+       write('Wybierz rodzaj pracy (1-4): ');
+       readln(wybor_prac);
+       
+       case wybor_prac of
+         1: begin zuzycie := 20.83 ; wydaj := 0.32  ; end;
+         2: begin zuzycie := 22.65 ; wydaj := 0.31  ; end;
+         3: begin zuzycie :=  2.65 ; wydaj := 5.42  ; end;
+         4: begin zuzycie := 11.33 ; wydaj := 2.07  ; end;
+         
+         else
+           begin
+             writeln('Nieznana praca! Ustawiam srednie parametry.');
+             zuzycie := 12.1; wydaj := 3.0;
+           end;
+       end;
+     end;
+
 
 
   0: begin
