@@ -9,8 +9,8 @@ uses
   SysUtils;
 
 const
-  wer = '1.05';
-  kompilacja = '0';
+  wer = '1.05.1';
+  kompilacja = '1';
 
 label
   poczatek,
@@ -66,6 +66,9 @@ if pole < 0.00001 then
   end;
 {else continue}
 
+write('Czy wynajmujesz pracownika? Jezeli tak, wpisz stawke za godzine. Jezeli nie = przeklikaj enterem. ');
+readln(pra_st); (* Pra_st to skrót od "PRAcownik STawka".*)
+
 write('Podaj aktualna cene paliwa za litr (PLN): ');
 readln(cena_paliwa);
 if cena_paliwa > 20 then
@@ -76,7 +79,7 @@ if cena_paliwa > 20 then
 if cena_paliwa < 3 then
   begin
     writeln('Co tak malo?!');
-    writeln('Na prawde tak tanio Ci dali paliwo?');
+    writeln('Naprawde tak tanio Ci dali paliwo?');
   end;
 {else continue}
 
