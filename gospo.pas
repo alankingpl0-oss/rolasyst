@@ -70,6 +70,13 @@ if pole < 0.00001 then
   end;
 {else continue}
 
+if pole = 2008 then
+  begin
+    writeln('Nie.');
+    goto koniec;
+  end;
+
+
 write('Czy wynajmujesz pracownika? Jezeli tak, wpisz stawke za godzine. (jesli nie, wpisz 0) ');
 readln(pra_st); (* Pra_st to skrót od "PRAcownik STawka".*)
 if pra_st = 0 then writeln('Czyli klasyka');
@@ -134,6 +141,14 @@ writeln('0. Inny (wpisz dane recznie)');
 writeln;
 write('Wybierz ciagnik (1-3, 0): ');
 readln(wybor);
+
+if wybor = 2008 then
+  begin
+    writeln('Chyba masz na mysli 2012?');
+    readln;
+    goto poczatek
+  end;
+  
 
 { Wybory }
 
@@ -334,6 +349,25 @@ write('Do jakiego pliku zapisac? (lub ''n'' aby nie zapisywac) ');
 readln(nazwa_pl); (* Zmieniono na readln, zeby nie bylo problemow z buforem *)
 if nazwa_pl = '' then nazwa_pl := 'RAPORT.TXT';
 if nazwa_pl = 'n' then goto koniec;
+if nazwa_pl = 'microsoft.txt' then
+  begin
+    writeln('Nie. Po prostu nie.');
+    writeln('Ten blad trzeba skorygowac.');
+    nazwa_pl := 'TylkoLinux!!.txt';
+  end;
+
+if nazwa_pl = 'raport_2008.txt' then
+  begin
+    writeln('Pomidor.');
+    nazwa_pl := 'raport_2012.txt';
+  end;
+
+if nazwa_pl = '2008.txt' then
+  begin
+    writeln('Skorygowano blad.');
+    nazwa_pl := '2012.txt';
+  end;
+
 
 assign(plyk, nazwa_pl);
 rewrite(plyk);
@@ -341,7 +375,7 @@ writeln(plyk, '=== RAPORT ===');
 writeln(plyk, 'Potrzebne paliwo: ........................ ', wyn_pal:0:2, ' litrow');
 writeln(plyk, 'Potrzebny czas: .......................... ', Format('%d:%.2d', [g_godz, g_min]), ' godzin');
 writeln(plyk, 'Koszt paliwa: ............................ ', wyn_koszt:0:2 , 'przy cenie za litr PLN', cena_paliwa:0:2);
-writeln(plyk, 'Pracownik: .. ............................ ', wyn_prac:0:2 , ' zl');
+writeln(plyk, 'Pracownik: ............................... ', wyn_prac:0:2 , ' zl');
 writeln(plyk, 'Ostateczny koszt (w tym ukryte koszty): .. ', wyn_ost:0:2 , ' zl');
 
 
@@ -398,6 +432,6 @@ debug:
   readln;
 
 koniec:
-writeln('Dziekujemy za skorzystanie z programu RolAsyst w wersji ', wer);
+writeln('Dziekujemy za skorzystanie z programu RolAsyst w wersji ', wer)
 
 end.
