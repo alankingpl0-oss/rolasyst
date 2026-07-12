@@ -9,8 +9,8 @@ uses
   SysUtils;
 
 const
-  wer = '1.06.1';
-  kompilacja = '1';
+  wer = '1.06.2';
+  kompilacja = '2';
 
 label
   poczatek,
@@ -97,10 +97,10 @@ if pra_st < 30 then
   begin
     writeln('TO SIE NAPRAWDE OPLACA!');
     readln;
-  end;
-  
+  end
 
-if pra_st < 70 then
+
+else if pra_st < 70 then
   begin
     writeln('To sie oplaca.');
   end;
