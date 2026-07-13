@@ -642,7 +642,7 @@ begin
   ReportDlg := New(PDialog, Init(R, 'Raport obliczen'));
   
   R.Assign(2, 2, 68, 3);
-  ReportDlg^.Insert(New(PStaticText, Init(R, '=== RAPORT ===')));
+  ReportDlg^.Insert(New(PStaticText, Init(R, 'RAPORT')));
   
   R.Assign(2, 4, 68, 5);
   ReportDlg^.Insert(New(PStaticText, Init(R, S1)));
@@ -663,7 +663,7 @@ begin
   ReportDlg^.Insert(New(PButton, Init(R, '~Z~apisz do pliku', cmOK, bfDefault)));
   
   R.Assign(40, 11, 55, 13);
-  ReportDlg^.Insert(New(PButton, Init(R, '~Z~amknij', cmCancel, bfNormal)));
+  ReportDlg^.Insert(New(PButton, Init(R, 'Z~a~mknij', cmCancel, bfNormal)));
   
   if Desktop^.ExecView(ReportDlg) = cmOK then
   begin

@@ -9,14 +9,16 @@ uses
   SysUtils;
 
 const
-  wer = '1.06.2';
-  kompilacja = '2';
+  wer = '1.07';
+  kompilacja = '0';
 
 label
   poczatek,
   ZaDuzo,
   dalej,
   koniec,
+  licz,
+  miary,
   debug;
 
 
@@ -38,6 +40,10 @@ var
   wyn_prac : Real;
   wyn_sur  : Real;
   wyn_ost  : Real;
+  menu     : Integer;
+  miary_wyb: Integer;
+  hektar   : Real
+  metr_kw  : Real
 
 
   g_godz, g_min : Integer;
@@ -50,6 +56,18 @@ poczatek:
 
 ClrScr;
 writeln('RolAsyst v', wer); writeln;
+
+{ Właściwe menu główne }
+
+writeln('1. Przelicznik miar');
+writeln('2. Zacznij obliczenia');
+
+readln(menu);
+if menu = 1 then goto miary
+if menu = 2 then goto licz
+
+licz:
+
 write('Podaj powierzchnie swojego pola w hektarach: ');
 readln(pole);
 if pole = 2012 then
@@ -118,13 +136,12 @@ write('Podaj aktualna cene paliwa za litr (PLN): ');
 readln(cena_paliwa);
 if cena_paliwa > 20 then
   begin
-    writeln('Troche za duzo.');
+    writeln('Troche za duzo. Lepiej znajdz inna stacje paliw.');
     goto poczatek
   end;
 if cena_paliwa < 3 then
   begin
-    writeln('Co tak malo?!');
-    writeln('Naprawde tak tanio Ci dali paliwo?');
+    writeln('Podejrzane. Skad bierzesz to paliwo?');
   end;
 {else continue}
 
@@ -436,6 +453,46 @@ debug:
      * 41 w menu wyboru ciągników,
      * żeby nic nie zwalić koncertowo... *)
   readln;
+
+{ PRZELICZNIK MIAR }
+
+miary:
+ClrScr;
+writeln('1. Hektar > Metr kwadratowy');
+writeln('2. Metr kw. > Hektar');
+writeln('0. Powrót');
+realn(miary_wyb);
+
+if miary_wyb = 0 then goto poczatek;
+
+{ Hektar na metry }
+if miary_wyb = 1 then
+  begin
+    ClrScr;
+    write('Wpisz liczbe hektarow');
+    readln(hektar);
+
+    metr_kw = hektar * 10000;
+    write(hektar, 'hektar(/ow) to ', metr_kw, ' metrow kwadratowych');
+    readln;
+    goto miary
+  end;
+
+
+{ Metry na hektar }
+
+if miary_wyb = 2 then
+  begin
+    ClrScr;
+    writeln('Podaj liczbe metrow kw.');
+
+    hektar = metr_kw / 10000;
+    write(metr_kw, 'metrow kw. to ', hektar ' hektarow');
+    readln;
+    goto miary
+  end;
+
+
 
 koniec:
 writeln('Dziekujemy za skorzystanie z programu RolAsyst w wersji ', wer)
