@@ -426,6 +426,12 @@ debug:
       goto debug;
     end;
   
+    if debug_wybor = 2 then
+      begin
+        ClrScr;
+        writeln('Tu cos bedzie');
+      end;
+  
     (* Na razie tyle w menu debug. Lepiej zostawić tą opcję
      * 41 w menu wyboru ciągników,
      * żeby nic nie zwalić koncertowo... *)
