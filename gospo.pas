@@ -42,8 +42,8 @@ var
   wyn_ost  : Real;
   menu     : Integer;
   miary_wyb: Integer;
-  hektar   : Real
-  metr_kw  : Real
+  hektar   : Real;
+  metr_kw  : Real;
 
 
   g_godz, g_min : Integer;
@@ -63,8 +63,8 @@ writeln('1. Przelicznik miar');
 writeln('2. Zacznij obliczenia');
 
 readln(menu);
-if menu = 1 then goto miary
-if menu = 2 then goto licz
+if menu = 1 then goto miary;
+if menu = 2 then goto licz;
 
 licz:
 
@@ -460,8 +460,8 @@ miary:
 ClrScr;
 writeln('1. Hektar > Metr kwadratowy');
 writeln('2. Metr kw. > Hektar');
-writeln('0. Powrót');
-realn(miary_wyb);
+writeln('0. Powrot');
+readln(miary_wyb);
 
 if miary_wyb = 0 then goto poczatek;
 
@@ -472,10 +472,10 @@ if miary_wyb = 1 then
     write('Wpisz liczbe hektarow');
     readln(hektar);
 
-    metr_kw = hektar * 10000;
-    write(hektar, 'hektar(/ow) to ', metr_kw, ' metrow kwadratowych');
+    metr_kw := hektar * 10000;
+    write(hektar:0:2, ' hektar(/ow) to ', metr_kw:0:2, ' metrow kwadratowych');
     readln;
-    goto miary
+    goto miary;
   end;
 
 
@@ -485,11 +485,12 @@ if miary_wyb = 2 then
   begin
     ClrScr;
     writeln('Podaj liczbe metrow kw.');
+    readln(metr_kw);
 
-    hektar = metr_kw / 10000;
-    write(metr_kw, 'metrow kw. to ', hektar ' hektarow');
+    hektar := metr_kw / 10000;
+    write(metr_kw:0:2, ' metrow kw. to ', hektar:0:2, ' hektarow');
     readln;
-    goto miary
+    goto miary;
   end;
 
 
