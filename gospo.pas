@@ -60,11 +60,13 @@ writeln('RolAsyst v', wer); writeln;
 { Właściwe menu główne }
 
 writeln('1. Przelicznik miar');
-writeln('2. Zacznij obliczenia');
+writeln('2. Kalendarz');
+writeln('0. Zacznij obliczenia');
 
 readln(menu);
 if menu = 1 then goto miary;
-if menu = 2 then goto licz;
+if menu = 2 then goto kalendarz;
+if menu = 0 then goto licz;
 
 licz:
 
@@ -493,7 +495,12 @@ if miary_wyb = 2 then
     goto miary;
   end;
 
+kalendarz:
 
+{ Menu kalendarza }
+ClrScr;
+writeln('1. Zobacz aktualny kalendarz');
+writeln('2. Dodaj do kalendarza');
 
 koniec:
 writeln('Dziekujemy za skorzystanie z programu RolAsyst w wersji ', wer)
