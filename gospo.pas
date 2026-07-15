@@ -9,8 +9,8 @@ uses
   SysUtils;
 
 const
-  wer = '1.07.1';
-  kompilacja = '1';
+  wer = '1.07.2';
+  kompilacja = '2';
 
 label
   poczatek,
@@ -69,11 +69,13 @@ writeln('RolAsyst v', wer); writeln;
 
 writeln('1. Przelicznik miar');
 writeln('2. Kalendarz');
+writeln('3. Hitoria przegladow');
 writeln('0. Zacznij obliczenia');
 
 readln(menu);
 if menu = 1 then goto miary;
 if menu = 2 then goto kalendarz;
+if menu = 3 then goto przeglady;
 if menu = 0 then goto licz;
 
 licz:
