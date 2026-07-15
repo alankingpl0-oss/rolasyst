@@ -9,8 +9,8 @@ uses
   SysUtils;
 
 const
-  wer = '1.07';
-  kompilacja = '0';
+  wer = '1.07.1';
+  kompilacja = '1';
 
 label
   poczatek,
