@@ -20,6 +20,7 @@ label
   licz,
   miary,
   kalendarz,
+  przeglady,
   debug;
 
 
@@ -318,6 +319,7 @@ case wybor of
 
 
 
+
   0: begin
        (* Klasyczna sciezka - reczne wpisywanie *)
        writeln('Wybrano konfiguracje reczna.');
@@ -585,6 +587,10 @@ if kal_wyb = 2 then
   end;
 
 goto kalendarz; (* Zabezpieczenie przed wyjściem w pustą przestrzeń *)
+
+przeglady:
+ClrScr;
+writeln('1. Aktualna historia przegladow');
 
 
 koniec:
