@@ -9,8 +9,8 @@ uses
   SysUtils;
 
 const
-  wer = '1.07.2';
-  kompilacja = '2';
+  wer = '1.08.0';
+  kompilacja = '0';
 
 label
   poczatek,
@@ -56,6 +56,13 @@ var
   kal_linia: String;
   kal_data : String;
   kal_wpis : String;
+
+  (* Zmienne pomocnicze do obsługi przegladów *)
+  prz_plik : Text;
+  prz_linia: String;
+  prz_data : String;
+  prz_wpis : String;
+  prz_wyb  : Integer;
 
 
 begin
@@ -589,9 +596,85 @@ if kal_wyb = 2 then
 goto kalendarz; (* Zabezpieczenie przed wyjściem w pustą przestrzeń *)
 
 przeglady:
-ClrScr;
-writeln('1. Aktualna historia przegladow');
 
+{ Menu przeglądów™ }
+{ PRZEGLADY }
+
+{kalendarz:}
+ClrScr;
+writeln('=== DZIENNIK PRZEGLADOW ===');
+writeln('1. Zobacz historie przegladow');
+writeln('2. Dodaj do przegladow');
+writeln('0. Powrot');
+write('Wybierz opcje: ');
+readln(prz_wyb);
+
+if prz_wyb = 0 then goto poczatek;
+
+{ 1. Wyswietlanie kalendarza }
+if prz_wyb = 1 then
+  begin
+    ClrScr;
+    writeln('=== TWOJE PRZEGLADY ===');
+    writeln;
+    
+    (* Sprawdzamy czy plik w ogóle istnieje *)
+    if FileExists('przegl.txt') then
+      begin
+        assign(prz_plik, 'przegl.txt');
+        reset(prz_plik);
+        
+        (* Czytamy plik linijka po linijce dopóki nie osiągniemy końca *)
+        while not eof(prz_plik) do
+          begin
+            readln(prz_plik, prz_linia);
+            writeln(prz_linia);
+          end;
+          
+        close(prz_plik);
+      end
+    else
+      begin
+        writeln('Tworzenie nowego (pustego) dziennika...');
+        (* Tworzymy pusty plik, jeśli jeszcze go nie ma *)
+        assign(prz_plik, 'przegl.txt');
+        rewrite(prz_plik);
+        close(prz_plik);
+        writeln('Brak zaplanowanych prac na ten moment.');
+      end;
+      
+    writeln;
+    writeln('Nacisnij Enter, aby powrocic...');
+    readln;
+    goto przeglady;
+  end;
+
+{ 2. Dodawanie nowego wpisu }
+if prz_wyb = 2 then
+  begin
+    ClrScr;
+    writeln('=== DODAJ WPIS DO KALENDARZA ===');
+    write('Podaj date (np. 15.07): ');
+    readln(prz_data);
+    write('Podaj nazwe maszyny: ');
+    readln(prz_wpis);
+    
+    (* Otwieramy plik w trybie Append - dopisywanie na koncu *)
+    assign(prz_plik, 'przegl.txt');
+    if FileExists('przegl.txt') then
+      append(prz_plik)
+    else
+      rewrite(prz_plik);
+      
+    writeln(prz_plik, '[', prz_data, '] - ', prz_wpis);
+    close(prz_plik);
+    
+    writeln('Wpis zapisany pomyslnie!');
+    readln;
+    goto przeglady;
+  end;
+
+goto przeglady; (* Zabezpieczenie przed wyjściem w pustą przestrzeń *)
 
 koniec:
 writeln('Dziekujemy za skorzystanie z programu RolAsyst w wersji ', wer)
