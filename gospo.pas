@@ -9,8 +9,8 @@ uses
   SysUtils;
 
 const
-  wer = '1.08.0';
-  kompilacja = '0';
+  wer = '1.08.1';
+  kompilacja = '1';
 
 label
   poczatek,
@@ -573,8 +573,14 @@ if kal_wyb = 2 then
   begin
     ClrScr;
     writeln('=== DODAJ WPIS DO KALENDARZA ===');
-    write('Podaj date (np. 15.07): ');
+    write('Podaj date (np. 21.12.2012): ');
     readln(kal_data);
+    if kal_data = '0' then
+      begin
+        writeln('Ech...');
+        writeln('Ustawiam koniec swiata');
+        kal_data := '21.12.2012';
+      end;
     write('Podaj opis pracy (np. Koszenie C-360): ');
     readln(kal_wpis);
     
@@ -654,8 +660,14 @@ if prz_wyb = 2 then
   begin
     ClrScr;
     writeln('=== DODAJ WPIS DO KALENDARZA ===');
-    write('Podaj date (np. 15.07): ');
+    write('Podaj date (np. 21.12.2012): ');
     readln(prz_data);
+    if prz_data = '0' then
+      begin
+        writeln('"0" to nie data. Jeszcze raz.');
+        writeln('Ustawiam date 21.12.2012');
+        prz_data := '21.12.2012';
+      end;
     write('Podaj nazwe maszyny: ');
     readln(prz_wpis);
     
