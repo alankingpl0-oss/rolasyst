@@ -64,6 +64,10 @@ var
   prz_wpis : String;
   prz_wyb  : Integer;
 
+  {zmienne do przelicznika mile - km}
+  mile     : Real;
+  kilometr : Real;
+
 
 begin
 { Wykradamy od uzytkownika cenne dane }
@@ -148,7 +152,14 @@ if pra_st < 30 then
 else if pra_st < 70 then
   begin
     writeln('To sie oplaca.');
+  end
+
+else if pra_st = 0 then writeln('Czyli klasyka');
+ { begin
+    writeln('Czyli robisz klasycznie.');
+    
   end;
+}
 
 
 
@@ -324,6 +335,28 @@ case wybor of
        end;
      end;
 
+  7:  begin
+       writeln('=== Praca dla Fendt 512 Vario ===');
+       writeln('1. Wciaganie drzewa 600 kg');
+       writeln('2. Wciganie drzewa 900 kg');
+       writeln('3. Siew (agregat 3 m)');
+       writeln('4. Gleboka orka 5 m');
+       write('Wybierz rodzaj pracy (1-4): ');
+       readln(wybor_prac);
+       
+       case wybor_prac of
+         1: begin zuzycie := 20.83 ; wydaj := 0.32  ; end;
+         2: begin zuzycie := 22.65 ; wydaj := 0.31  ; end;
+         3: begin zuzycie :=  2.65 ; wydaj := 5.42  ; end;
+         4: begin zuzycie := 11.33 ; wydaj := 2.07  ; end;
+         
+         else
+           begin
+             writeln('Nieznana praca! Ustawiam srednie parametry.');
+             zuzycie := 12.1; wydaj := 3.0;
+           end;
+       end;
+     end;
 
 
 
@@ -481,6 +514,8 @@ miary:
 ClrScr;
 writeln('1. Hektar > Metr kwadratowy');
 writeln('2. Metr kw. > Hektar');
+writeln('3. Mila > kilometr');
+writeln('4. Kilometr > mila');
 writeln('0. Powrot');
 readln(miary_wyb);
 
@@ -510,6 +545,32 @@ if miary_wyb = 2 then
 
     hektar := metr_kw / 10000;
     write(metr_kw:0:2, ' metrow kw. to ', hektar:0:2, ' hektarow');
+    readln;
+    goto miary;
+  end;
+
+{Kilometr na milę}
+
+if miary_wyb = 3 then
+  begin
+    ClrScr;
+    write('Podaj mile ');
+    readln(mile);
+
+    kilometr :=  mile * 1.609;
+    write(mile:0:1, ' mil to ', kilometr:0:3, ' kiloemtr(/ow)');
+    readln;
+    goto miary
+  end;
+
+if miary_wyb = 4 then
+  begin
+    ClrScr;
+    write('Podaj kilometry ');
+    readln(kilometr);
+
+    mile := kilometr / 1.609;
+    write(kilometr:0:3, ' kilometrow to ', mile:0:1, ' mil(i)');
     readln;
     goto miary;
   end;
@@ -659,7 +720,7 @@ if prz_wyb = 1 then
 if prz_wyb = 2 then
   begin
     ClrScr;
-    writeln('=== DODAJ WPIS DO KALENDARZA ===');
+    writeln('=== DODAJ WPIS DO DZIENNIKA ===');
     write('Podaj date (np. 21.12.2012): ');
     readln(prz_data);
     if prz_data = '0' then
