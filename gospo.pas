@@ -9,8 +9,8 @@ uses
   SysUtils;
 
 const
-  wer = '2.00-beta1';
-  kompilacja = 'b1';
+  wer = '2.00-beta2';
+  kompilacja = 'b2';
 
 label
   poczatek,
@@ -87,6 +87,7 @@ writeln('RolAsyst v', wer); writeln;
 writeln('1. Przelicznik miar');
 writeln('2. Kalendarz');
 writeln('3. Hitoria przegladow');
+writeln('4. Kalkulator (wkrotce)');
 writeln('0. Zacznij obliczenia');
 
 readln(menu);
@@ -190,9 +191,10 @@ writeln('3. Zetor 7211');
 writeln('4. Claas Axion Terra Trac');
 writeln('5. Zetor Crystal 160');
 writeln('6. Mercedes MB-Trac 800');
+writeln('7. Fendt 512 Vario');
 writeln('0. Inny (wpisz dane recznie)');
 writeln;
-write('Wybierz ciagnik (1-3, 0): ');
+write('Wybierz ciagnik (1-7, 0): ');
 readln(wybor);
 
 if wybor = 2008 then
@@ -339,21 +341,21 @@ case wybor of
            end;
        end;
      end;
-
+{Fendt 512 Vario}
   7:  begin
        writeln('=== Praca dla Fendt 512 Vario ===');
-       writeln('1. Wciaganie drzewa 600 kg');
-       writeln('2. Wciganie drzewa 900 kg');
+       writeln('1. Lekka orka (agregat 5 m)');
+       writeln('2. Gleboka orka (agregat 9 m)');
        writeln('3. Siew (agregat 3 m)');
-       writeln('4. Gleboka orka 5 m');
+       writeln('4. Siew (agregat 6 m)');
        write('Wybierz rodzaj pracy (1-4): ');
        readln(wybor_prac);
        
        case wybor_prac of
-         1: begin zuzycie := 20.83 ; wydaj := 0.32  ; end;
-         2: begin zuzycie := 22.65 ; wydaj := 0.31  ; end;
-         3: begin zuzycie :=  2.65 ; wydaj := 5.42  ; end;
-         4: begin zuzycie := 11.33 ; wydaj := 2.07  ; end;
+         1: begin zuzycie := 7.30  ; wydaj := 3.14  ; end;
+         2: begin zuzycie := 36.41 ; wydaj := 4.86  ; end;
+         3: begin zuzycie := 28.10 ; wydaj := 5.02  ; end;
+         4: begin zuzycie := 40.90 ; wydaj := 8.13  ; end;
          
          else
            begin
