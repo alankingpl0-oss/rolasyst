@@ -44,8 +44,9 @@ Najnowsze wydania gotowe do uruchomienia znajdziesz w sekcji **Releases**:
 
 1. Sklonuj repozytorium:
    ```bash
-   git clone [https://github.com/alankingpl0-oss/rolasyst.git](https://github.com/alankingpl0-oss/rolasyst.git)
+   git clone [https://github.com/alankingpl0-oss/rolasyst.git]
    cd rolasyst
+   fpc gospo
    ```
 
 ## 🎨 Zasoby graficzne
