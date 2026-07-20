@@ -714,7 +714,6 @@ write('Wybierz opcje: ');
 readln(prz_wyb);
 
 if prz_wyb = 0 then goto poczatek;
-
 { 1. Wyswietlanie kalendarza }
 if prz_wyb = 1 then
   begin
