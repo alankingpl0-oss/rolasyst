@@ -1,5 +1,11 @@
 # RolAsyst™
 
+<a href="https://github.com/alankingpl0-oss/rolasyst/releases">
+  <img src="https://img.shields.io/badge/Pobierz-PowerKilo--blue?style=plastic&icon=github" width="200" alt="Pobierz">
+</a>
+
+---
+
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg?style=plastic)](https://www.gnu.org/licenses/gpl-3.0)
 [![Linux Ready](https://img.shields.io/badge/OS-Linux%20%7C%20Windows-brightgreen.svg?style=plastic)](#binarki)
 [![GitHub release](https://img.shields.io/github/v/release/alankingpl0-oss/rolasyst?style=plastic&color=blue)](https://github.com/alankingpl0-oss/rolasyst/releases)
