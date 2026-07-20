@@ -9,8 +9,8 @@ uses
   SysUtils;
 
 const
-  wer = '2.00-beta2';
-  kompilacja = 'b2';
+  wer = '2.00-beta3';
+  kompilacja = 'b3';
 
 label
   poczatek,
@@ -21,6 +21,7 @@ label
   miary,
   kalendarz,
   przeglady,
+  kalkulator,
   debug;
 
 
@@ -63,6 +64,7 @@ var
   prz_data : String;
   prz_wpis : String;
   prz_wyb  : Integer;
+  prz_mth  : Real  ;
 
   {zmienne do przelicznika mile - km}
   mile     : Real;
@@ -418,7 +420,7 @@ wyn_ost := wyn_sur * 1.10;
   writeln('Potrzebne paliwo: .............................. ', wyn_pal:0:2, ' litrow');
   writeln('Potrzebny czas: ................................ ', Format('%d:%.2d', [g_godz, g_min]), ' godzin');
   writeln('Koszt paliwa: .................................. ', wyn_koszt:0:2, ' przy cenie za litr PLN ', cena_paliwa:0:2);
-  writeln('Pracownik: ............................... ', wyn_prac:0:2 , ' zl');
+  writeln('Pracownik: ..................................... ', wyn_prac:0:2 , ' zl');
   writeln('Ostateczny koszt (w tym ukryte koszty): ........ ', wyn_ost:0:2 , ' zl');
   writeln;
 
@@ -766,6 +768,9 @@ if prz_wyb = 2 then
       end;
     write('Podaj nazwe maszyny: ');
     readln(prz_wpis);
+
+    write('Podaj aktualna liczbe mth');
+    readln(prz_mth);
     
     (* Otwieramy plik w trybie Append - dopisywanie na koncu *)
     assign(prz_plik, 'przegl.txt');
@@ -774,7 +779,7 @@ if prz_wyb = 2 then
     else
       rewrite(prz_plik);
       
-    writeln(prz_plik, '[', prz_data, '] - ', prz_wpis);
+    writeln(prz_plik, '[', prz_data, '] - ', prz_wpis, prz_mth:0:1, ' mth');
     close(prz_plik);
     
     writeln('Wpis zapisany pomyslnie!');
@@ -783,6 +788,12 @@ if prz_wyb = 2 then
   end;
 
 goto przeglady; (* Zabezpieczenie przed wyjściem w pustą przestrzeń *)
+
+kalkulator:
+{W przygotowaniu}
+ClrScr;
+  writeln('W przygotowaniu');
+  readln;
 
 koniec:
 writeln('Dziekujemy za skorzystanie z programu RolAsyst w wersji ', wer)
