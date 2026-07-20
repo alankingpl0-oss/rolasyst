@@ -9,8 +9,8 @@ uses
   SysUtils;
 
 const
-  wer = '1.08.1';
-  kompilacja = '1';
+  wer = '2.00-beta1';
+  kompilacja = 'b1';
 
 label
   poczatek,
@@ -67,6 +67,11 @@ var
   {zmienne do przelicznika mile - km}
   mile     : Real;
   kilometr : Real;
+
+  {zmienne do przelicznika akry - hektary}
+
+  akry     : Real;
+
 
 
 begin
@@ -516,6 +521,8 @@ writeln('1. Hektar > Metr kwadratowy');
 writeln('2. Metr kw. > Hektar');
 writeln('3. Mila > kilometr');
 writeln('4. Kilometr > mila');
+writeln('5. Hektar > akr');
+writeln('6. Akr > hektar');
 writeln('0. Powrot');
 readln(miary_wyb);
 
@@ -573,6 +580,32 @@ if miary_wyb = 4 then
     write(kilometr:0:3, ' kilometrow to ', mile:0:1, ' mil(i)');
     readln;
     goto miary;
+  end;
+
+{na akry}
+if miary_wyb = 5 then
+  begin
+    ClrScr;
+    write('Podaj ilosc hektarow ');
+    readln(hektar);
+    
+    akry := hektar / 0.405;
+    write(hektar:0:1, ' hektar(/ow) to ', akry:0:3, ' akrow');
+    readln;
+    goto miary
+  end;
+
+{na hektary}
+if miary_wyb = 6 then
+  begin
+    ClrScr;
+    write('Podaj ilosc akrow ');
+    readln(akry);
+
+    hektar := akry * 0.405;
+    write(akry:0:3, ' akrow to ', hektar:0:1, ' hektarow');
+    readln;
+    goto miary
   end;
 
 kalendarz:
