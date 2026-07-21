@@ -9,8 +9,8 @@ uses
   SysUtils;
 
 const
-  wer = '2.00-beta4';
-  kompilacja = 'b4';
+  wer = '2.00';
+  kompilacja = '0';
 
 label
   poczatek,
@@ -208,9 +208,10 @@ writeln('4. Claas Axion Terra Trac');
 writeln('5. Zetor Crystal 160');
 writeln('6. Mercedes MB-Trac 800');
 writeln('7. Fendt 512 Vario');
+writeln('8. New Holland T5.90S');
 writeln('0. Inny (wpisz dane recznie)');
 writeln;
-write('Wybierz ciagnik (1-7, 0): ');
+write('Wybierz ciagnik (1-8, 0): ');
 readln(wybor);
 
 if wybor = 2008 then
@@ -372,6 +373,34 @@ case wybor of
          2: begin zuzycie := 36.41 ; wydaj := 4.86  ; end;
          3: begin zuzycie := 28.10 ; wydaj := 5.02  ; end;
          4: begin zuzycie := 40.90 ; wydaj := 8.13  ; end;
+         
+         else
+           begin
+             writeln('Nieznana praca! Ustawiam srednie parametry.');
+             zuzycie := 12.1; wydaj := 3.0;
+           end;
+       end;
+     end;
+
+{New Holland T5.90S}
+  8:  begin
+       writeln('=== Praca dla New Holland T5.90S ===');
+       writeln('1. Lekka orka (agregat 6 m)');
+       writeln('2. Gleboka orka (agregat 7 m)');
+       writeln('3. Siew (agregat 3 m)');
+       writeln('4. Siew (agregat 6 m)');
+       writeln('5. Prasowanie / Class Rollant');
+       writeln('6. Nawozenie (agregat 15 m)');
+       write('Wybierz rodzaj pracy (1-4): ');
+       readln(wybor_prac);
+       
+       case wybor_prac of
+         1: begin zuzycie := 5.69  ; wydaj := 3.91  ; end;
+         2: begin zuzycie :=  7.73 ; wydaj := 2.55  ; end;
+         3: begin zuzycie := 15.31 ; wydaj := 5.04  ; end;
+         4: begin zuzycie := 20.90 ; wydaj := 8.13  ; end;
+         5: begin zuzycie := 54.98 ; wydaj := 10.09 ; end;
+         6: begin zuzycie := 49.02 ; wydaj := 16.47 ; end;
          
          else
            begin
@@ -782,7 +811,7 @@ if prz_wyb = 2 then
     write('Podaj nazwe maszyny: ');
     readln(prz_wpis);
 
-    write('Podaj aktualna liczbe mth');
+    write('Podaj aktualna liczbe mth ');
     readln(prz_mth);
     
     (* Otwieramy plik w trybie Append - dopisywanie na koncu *)
@@ -792,7 +821,7 @@ if prz_wyb = 2 then
     else
       rewrite(prz_plik);
       
-    writeln(prz_plik, '[', prz_data, '] - ', prz_wpis, prz_mth:0:1, ' mth');
+    writeln(prz_plik, '[', prz_data, '] - ', prz_wpis, ', ', prz_mth:0:1, ' mth');
     close(prz_plik);
     
     writeln('Wpis zapisany pomyslnie!');
