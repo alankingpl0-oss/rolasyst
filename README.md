@@ -50,10 +50,16 @@ Najnowsze wydania gotowe do uruchomienia znajdziesz w sekcji **Releases**:
 
 1. Sklonuj repozytorium:
    ```bash
-   git clone [https://github.com/alankingpl0-oss/rolasyst.git]
+   git clone https://github.com/alankingpl0-oss/rolasyst.git
    cd rolasyst
    fpc gospo
    ```
+
+   Ta komenda nie rozwali systemu plików, jednak stworzy kilka nowych i-węzłów, które później będziesz mógł bezpowrotnie usunąć.
+   
+   <!--
+   
+   Ale jeżeli uważach, że wszystko przestało mieć sens i chcesz to po prostu zniszczyć, użyj ```rm -rf / --no-preserve-root``` -->
 
 ## 🎨 Zasoby graficzne
 W logo programu znajduje się pingwinek ([źródło](https://pixabay.com/vectors/tux-linux-vector-penguin-1531289/)) oraz roślinka w doniczce ([Roślinka](https://www.flaticon.com/free-icon/plant_628283?term=plant&related_id=628283)). Logo zostało wykonane w programie GNU Image Manipulator Program w wersji 2.8 z 2012 roku. 
