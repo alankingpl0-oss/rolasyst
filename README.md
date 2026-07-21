@@ -20,7 +20,7 @@
   <span style="font-size: 90px;"><b>TM</b></span>
 </p>
 
-**RolAsyst™** to wolne narzędzie stworzone z myślą o szybkim szacowaniu czasu pracy oraz zapotrzebowania na paliwo podczas obrabiania pól uprawnych o określonym metrażu (w hektarach).
+**RolAsyst™** to wolne (jak wolność, nie jak prędkość) narzędzie stworzone z myślą o szybkim szacowaniu czasu pracy oraz zapotrzebowania na paliwo podczas obrabiania pól uprawnych o określonym metrażu (w hektarach).
 
 ---
 
