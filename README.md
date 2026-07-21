@@ -35,7 +35,7 @@
 
 ## 🚀 Szybki start / Binarki
 
-Program jest dostępny w gotowej wersji binarnej na systemy **Linux™** oraz **Windows®, ale lepiej na Linuksie**.
+Program jest dostępny w gotowej wersji binarnej na systemy **Linux®**, **Amiga® (w przygotowaniu)**, **FreeDOS®**, **macOS® (w przygotowaniu)** **Windows® (ale jego lepiej pominąć)**, więc zadziała nawet na systemie operacyjnym klamki do drzwi.
 
 RolAsyst stawia na wolność i wieloplatformowość.
 
