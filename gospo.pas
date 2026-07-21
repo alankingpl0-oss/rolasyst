@@ -9,8 +9,8 @@ uses
   SysUtils;
 
 const
-  wer = '2.00-beta3';
-  kompilacja = 'b3';
+  wer = '2.00-beta4';
+  kompilacja = 'b4';
 
 label
   poczatek,
@@ -74,6 +74,13 @@ var
 
   akry     : Real;
 
+  {Zmienne na kalkulator}
+  kalk_wyb : Integer;
+  kalk_wynik:Real;
+  kalka    : Real;
+  kalkb    : Real;
+  kalkoperacja:Char;
+
 
 
 begin
@@ -89,14 +96,21 @@ writeln('RolAsyst v', wer); writeln;
 writeln('1. Przelicznik miar');
 writeln('2. Kalendarz');
 writeln('3. Hitoria przegladow');
-writeln('4. Kalkulator (wkrotce)');
+writeln('4. Kalkulator (zwiastun)');
 writeln('0. Zacznij obliczenia');
 
 readln(menu);
 if menu = 1 then goto miary;
 if menu = 2 then goto kalendarz;
 if menu = 3 then goto przeglady;
-if menu = 0 then goto licz;
+if menu = 4 then goto kalkulator;
+if menu = 0 then goto licz
+else
+  begin
+    writeln('Zy wybor. Wybierz od 1 do 4, lub 0');
+    readln;
+    goto poczatek;
+  end;
 
 licz:
 
@@ -789,10 +803,65 @@ if prz_wyb = 2 then
 goto przeglady; (* Zabezpieczenie przed wyjściem w pustą przestrzeń *)
 
 kalkulator:
-{W przygotowaniu}
-ClrScr;
-  writeln('W przygotowaniu');
-  readln;
+{ W przygotowaniu }
+  ClrScr;
+  writeln('Prosty kalkulator');
+  writeln('1. Licz');
+  writeln('0. Powrot');
+  readln(kalk_wyb);
+
+  if kalk_wyb = 1 then
+    begin
+      ClrScr;
+      writeln('Pisz dzialanie...');
+      
+      { Pobieramy po kolei składniki }
+      write('Podaj pierwsza liczbe: ');
+      readln(kalka);
+      
+      write('Podaj znak dzialania (+, -, *, /): ');
+      readln(kalkoperacja);
+      
+      write('Podaj druga liczbe: ');
+      readln(kalkb);
+      
+      { Rozbicie na operacje }
+      case kalkoperacja of
+        '+': kalk_wynik := kalka + kalkb;
+        '-': kalk_wynik := kalka - kalkb;
+        '*': kalk_wynik := kalka * kalkb;
+        '/': 
+          begin
+            if kalkb <> 0 then
+              kalk_wynik := kalka / kalkb
+            else
+              begin
+                writeln('Blad: Nie dziel przez zero!');
+                { Dajemy małą pauzę przed powrotem do pętli }
+                readln;
+                goto kalkulator;
+              end;
+          end;
+      else
+        begin
+          writeln('Nieznana operacja!');
+          readln;
+          goto kalkulator;
+        end;
+      end;
+
+      writeln('Wynik: ', kalk_wynik:0:2);
+      writeln('Nacisnij Enter, aby kontynuowac...');
+      readln;
+      goto poczatek;
+    end;
+  
+  if kalk_wyb = 0 then
+    begin
+      goto poczatek;
+    end;
+
+
 
 koniec:
 writeln('Dziekujemy za skorzystanie z programu RolAsyst w wersji ', wer)
