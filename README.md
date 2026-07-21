@@ -16,7 +16,7 @@
 </p>
 <p align="center">
  
-  <img src="logo.png" width="450" alt="RolAsyst Logo">
+  <img src="pomoc/logo.png" width="450" alt="RolAsyst Logo">
   <span style="font-size: 90px;"><b>TM</b></span>
 </p>
 
