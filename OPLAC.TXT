@@ -1,0 +1,8 @@
+Zatem wiec oplacalnosc pszenicy to:
+Przy bardzo dobrej glebie:  0.0000000000000000E+000 litrow z calego pola
+Przy gorszej glebie: .....  0.0000000000000000E+000 litrow z calego pola
+Typowo: 0.000 litrow z calego pola. Zarobisz wiec: 0.00 zl.
+Dane te sa wyliczony do typowych prac polowych,
+jednak przy ciezkiej orce czy gliniastej
+glebie zuzycie i wydajnosc moze ulec zmianie
+

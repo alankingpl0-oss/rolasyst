@@ -10,19 +10,20 @@ uses
   SysUtils;
 
 const
-  wer = '2.1';
-  kompilacja = '0';
+  wer = '3.0-beta1';
+  kompilacja = 'b0';
 
 label
   poczatek,
   ZaDuzo,
   dalej,
-  koniec,
   licz,
   miary,
   kalendarz,
   przeglady,
   kalkulator,
+  oplacalno,
+  koniec,
   debug;
 
 
@@ -82,6 +83,13 @@ var
   kalkb    : Real;
   kalkoperacja:Char;
 
+  {Zmienne dla opłacalności}
+  roslina  : Integer;
+  cenanaskupie:Real;
+  cenanasion:Real;
+  iloscnasion, oplacalnosc, oplacalnosc0, oplacalnosc1, oplacalnosc2, koszt_nasion, przychod, zysk_czysty : Real;
+
+
 
 
 begin
@@ -98,6 +106,7 @@ writeln('1. Przelicznik miar');
 writeln('2. Kalendarz');
 writeln('3. Hitoria przegladow');
 writeln('4. Kalkulator (zwiastun)');
+writeln('5. Oblicz oplacalnosc');
 writeln('0. Zacznij obliczenia');
 
 readln(menu);
@@ -105,6 +114,7 @@ if menu = 1 then goto miary;
 if menu = 2 then goto kalendarz;
 if menu = 3 then goto przeglady;
 if menu = 4 then goto kalkulator;
+if menu = 5 then goto oplacalno;
 if menu = 0 then goto licz
 else
   begin
@@ -919,6 +929,107 @@ kalkulator:
     begin
       goto poczatek;
     end;
+
+oplacalno:
+{Oblicz opłacalność}
+
+
+ClrScr;
+
+write('Podaj cene nasion za 1000 litrow... ');
+readln(cenanasion);
+write('A teraz podaj cene na skupie? ');
+readln(cenanaskupie);
+writeln('Podaj rosline:');
+writeln('1. Pszenica ozima');
+writeln('0. Powrot');
+readln(roslina);
+write('Ile litrow nasion wsypales? ');
+readln(iloscnasion);
+
+if roslina = 0 then goto poczatek;
+
+(* Liczmy *)
+if roslina = 1 then
+  begin
+    (* Ilosc plonu w litrach w zaleznosci od gleby *)
+    oplacalnosc1 := iloscnasion * 25; (* gorsza *)
+    oplacalnosc2 := iloscnasion * 45; (* dobra *)
+    oplacalnosc0 := iloscnasion * 34; (* typowa *)
+
+    (* Obliczenie kosztow i przychodu dla wariantu typowego *)
+    koszt_nasion := (iloscnasion / 1000.0) * cenanasion;
+    przychod := (oplacalnosc0 / 1000.0) * cenanaskupie;
+    zysk_czysty := przychod - koszt_nasion;
+
+    ClrScr;
+    writeln('Zatem wiec oplacalnosc pszenicy to:');
+    writeln;
+    writeln('Przy bardzo dobrej glebie: ', oplacalnosc2:0:3, ' litrow z calego pola');
+    writeln('Przy gorszej glebie: ..... ', oplacalnosc1:0:3, ' litrow z calego pola');
+    writeln;
+
+    writeln('Typowo zebrane: .......... ', oplacalnosc0:0:3, ' litrow z calego pola.');
+    writeln('Koszt wysiewu: ........... ', koszt_nasion:0:2, ' zl.');
+    writeln('Przychod ze skupu: ....... ', przychod:0:2, ' zl.');
+    writeln('Czysty zysk wynosi: ...... ', zysk_czysty:0:2, ' zl.');
+    
+    readln;
+    ClrScr;
+  end;
+    
+    {Kawałek przeklejony prawie słowo-w-słowo z sekcji zapisywania raportu}
+
+    write('Do jakiego pliku zapisac? (lub ''n'' aby nie zapisywac) ');
+readln(nazwa_pl); (* Zmieniono na readln, zeby nie bylo problemow z buforem *)
+if nazwa_pl = '' then nazwa_pl := 'OPLAC.TXT';
+if nazwa_pl = 'n' then goto koniec;
+if nazwa_pl = 'microsoft.txt' then
+  begin
+    writeln('Nie. Po prostu nie.');
+    writeln('Ten blad trzeba skorygowac.');
+    nazwa_pl := 'TylkoLinux!!.txt';
+  end;
+
+if nazwa_pl = 'raport_2008.txt' then
+  begin
+    writeln('Pomidor.');
+    nazwa_pl := 'raport_2012.txt';
+  end;
+
+if nazwa_pl = '2008.txt' then
+  begin
+    writeln('Skorygowano blad.');
+    nazwa_pl := '2012.txt';
+  end;
+
+
+assign(plyk, nazwa_pl);
+rewrite(plyk);
+writeln(plyk, 'Zatem wiec oplacalnosc pszenicy to:');
+    writeln;
+    writeln(plyk, 'Przy bardzo dobrej glebie: ', oplacalnosc2, ' litrow z calego pola');
+    writeln(plyk, 'Przy gorszej glebie: ..... ', oplacalnosc1, ' litrow z calego pola'); writeln;
+
+    writeln(plyk, 'Typowo: ', oplacalnosc0:0:3, ' litrow z calego pola. Zarobisz wiec: ', oplacalnosc:0:2, ' zl.');
+
+
+
+(* W Pascalu kazda linia tekstu powinna byc osobnym wywolaniem writeln *)
+writeln(plyk, 'Dane te sa wyliczony do typowych prac polowych,');
+writeln(plyk, 'jednak przy ciezkiej orce czy gliniastej');
+writeln(plyk, 'glebie zuzycie i wydajnosc moze ulec zmianie');
+
+writeln(plyk); (* Jesli pusty wiersz mial byc w pliku, musimy przekazac zmienna plikowa *)
+close(plyk);
+
+{ClrScr;}
+writeln('Zapisano do pliku: "', nazwa_pl, '".');
+readln;
+goto poczatek;
+
+  
+
 
 
 
