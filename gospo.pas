@@ -1034,6 +1034,6 @@ goto poczatek;
 
 
 koniec:
-writeln('Dziekujemy za skorzystanie z programu RolAsyst w wersji ', wer)
+writeln('Dziekujemy za skorzystanie z programu RolAsyst w wersji ', wer);
 
 end.
