@@ -1,0 +1,10 @@
+=== RAPORT ===
+Potrzebne paliwo: ........................ 49.02 litrow
+Potrzebny czas: .......................... 0:04 godzin
+Koszt paliwa: ............................ 0.00przy cenie za litr PLN0.00
+Pracownik: ............................... 0.00 zl
+Ostateczny koszt (w tym ukryte koszty): .. 0.00 zl
+Dane te sa wyliczony do typowych prac polowych,
+jednak przy ciezkiej orce czy gliniastej
+glebie zuzycie i wydajnosc moze ulec zmianie
+
