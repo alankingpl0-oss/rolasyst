@@ -23,6 +23,8 @@
 
 **RolAsyst™** to wolne (jak wolność, nie jak prędkość) narzędzie stworzone z myślą o szybkim szacowaniu czasu pracy oraz zapotrzebowania na paliwo podczas obrabiania pól uprawnych o określonym metrażu (w hektarach).
 
+**Ważne:** program od 24.7.2026 używa autorskiego dialektu [Maksoft Pascal](https://github.com/maksoftx/pascal).
+
 ---
 
 ## 🚜 Główne funkcje
