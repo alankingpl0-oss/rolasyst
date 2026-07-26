@@ -8,11 +8,14 @@ program RolAsyst;
 uses
   FreeCrt,
   miary,
+  przeglady,
+  kalendarz,
+  dos,
   SysUtils;
 
 const
-  wer = '3.0-beta2';
-  kompilacja = 'b2';
+  wer = '3.0-beta3';
+  kompilacja = 'b3';
 
 label
   poczatek,
@@ -20,8 +23,8 @@ label
   dalej,
   licz,
   {miary,}
-  kalendarz,
-  przeglady,
+  {kalendarz,}
+  {przeglady,}
   kalkulator,
   oplacalno,
   koniec,
@@ -48,24 +51,14 @@ var
   wyn_ost  : Real;
   menu     : Integer;
   miary_wyb: Integer;
-  kal_wyb  : Integer;
+  
 
 
   g_godz, g_min : Integer;
 
-  (* Zmienne pomocnicze do obsługi kalendarza *)
-  kal_plik : Text;
-  kal_linia: String;
-  kal_data : String;
-  kal_wpis : String;
+  
 
-  (* Zmienne pomocnicze do obsługi przegladów *)
-  prz_plik : Text;
-  prz_linia: String;
-  prz_data : String;
-  prz_wpis : String;
-  prz_wyb  : Integer;
-  prz_mth  : Real  ;
+
 
     {Zmienne na kalkulator}
   kalk_wyb : Integer;
@@ -106,15 +99,21 @@ if menu = 1 then
     miary.obsluga;
   end;
 
-if menu = 2 then goto kalendarz;
-if menu = 3 then goto przeglady;
+if menu = 2 then
+  begin
+    kalendarz.obsluga;
+  end;
+if menu = 3 then
+  begin
+    przeglady.obsluga;
+  end;
 if menu = 4 then goto kalkulator;
 if menu = 5 then goto oplacalno;
 if menu = 0 then goto licz
 else
   begin
-    writeln('Zy wybor. Wybierz od 1 do 4, lub 0');
-    readln;
+    writeln('Zy wybor. Wybierz od 1 do 5, lub 0');
+    {readln;}
     goto poczatek;
   end;
 
@@ -583,8 +582,23 @@ debug:
       ClrScr;
       goto debug;
     end;
+
+     if debug_wybor = 2 then
+      begin
+        ClrScr;
+        writeln('=== PAMIEC SYSTEMOWA (FPC) ===');
+        
+        (* GetHeapStatus.TotalFree daje wolną pamięć na stercie w bajtach *)
+        writeln('Dostepna pamiec sterty: ', GetHeapStatus.TotalFree div 1024, ' KB');
+        writeln('Calkowity rozmiar sterty: ', GetHeapStatus.TotalAllocated div 1024, ' KB');
+        
+        readln;
+        ClrScr;
+        goto debug;
+      
+      end;
   
-    if debug_wybor = 2 then
+ {   if debug_wybor = 2 then
       begin
         ClrScr;
         writeln('Tu cos bedzie');
@@ -594,186 +608,15 @@ debug:
      * 41 w menu wyboru ciągników,
      * żeby nic nie zwalić koncertowo... *)
   readln;
+}
+
 
 { PRZELICZNIK MIAR }
 
 {Jest w module miary.pas "miary"}
 
-kalendarz:
 
-{ Menu kalendarza }
-{ KALENDARZ }
 
-{kalendarz:}
-ClrScr;
-writeln('=== KALENDARZ PRAC POLOWYCH ===');
-writeln('1. Zobacz aktualny kalendarz');
-writeln('2. Dodaj do kalendarza');
-writeln('0. Powrot');
-write('Wybierz opcje: ');
-readln(kal_wyb);
-
-if kal_wyb = 0 then goto poczatek;
-
-{ 1. Wyswietlanie kalendarza }
-if kal_wyb = 1 then
-  begin
-    ClrScr;
-    writeln('=== TWOJE PLANOWANE PRACE ===');
-    writeln;
-    
-    (* Sprawdzamy czy plik w ogóle istnieje *)
-    if FileExists('kalendarz.txt') then
-      begin
-        assign(kal_plik, 'kalendarz.txt');
-        reset(kal_plik);
-        
-        (* Czytamy plik linijka po linijce dopóki nie osiągniemy końca *)
-        while not eof(kal_plik) do
-          begin
-            readln(kal_plik, kal_linia);
-            writeln(kal_linia);
-          end;
-          
-        close(kal_plik);
-      end
-    else
-      begin
-        writeln('Tworzenie nowego (pustego) kalendarza...');
-        (* Tworzymy pusty plik, jeśli jeszcze go nie ma *)
-        assign(kal_plik, 'kalendarz.txt');
-        rewrite(kal_plik);
-        close(kal_plik);
-        writeln('Brak zaplanowanych prac na ten moment.');
-      end;
-      
-    writeln;
-    writeln('Nacisnij Enter, aby powrocic...');
-    readln;
-    goto kalendarz;
-  end;
-
-{ 2. Dodawanie nowego wpisu }
-if kal_wyb = 2 then
-  begin
-    ClrScr;
-    writeln('=== DODAJ WPIS DO KALENDARZA ===');
-    write('Podaj date (np. 21.12.2012): ');
-    readln(kal_data);
-    if kal_data = '0' then
-      begin
-        writeln('Ech...');
-        writeln('Ustawiam koniec swiata');
-        kal_data := '21.12.2012';
-      end;
-    write('Podaj opis pracy (np. Koszenie C-360): ');
-    readln(kal_wpis);
-    
-    (* Otwieramy plik w trybie Append - dopisywanie na koncu *)
-    assign(kal_plik, 'kalendarz.txt');
-    if FileExists('kalendarz.txt') then
-      append(kal_plik)
-    else
-      rewrite(kal_plik);
-      
-    writeln(kal_plik, '[', kal_data, '] - ', kal_wpis);
-    close(kal_plik);
-    
-    writeln('Wpis zapisany pomyslnie!');
-    readln;
-    goto kalendarz;
-  end;
-
-goto kalendarz; (* Zabezpieczenie przed wyjściem w pustą przestrzeń *)
-
-przeglady:
-
-{ Menu przeglądów™ }
-{ PRZEGLADY }
-
-{kalendarz:}
-ClrScr;
-writeln('=== DZIENNIK PRZEGLADOW ===');
-writeln('1. Zobacz historie przegladow');
-writeln('2. Dodaj do przegladow');
-writeln('0. Powrot');
-write('Wybierz opcje: ');
-readln(prz_wyb);
-
-if prz_wyb = 0 then goto poczatek;
-{ 1. Wyswietlanie kalendarza }
-if prz_wyb = 1 then
-  begin
-    ClrScr;
-    writeln('=== TWOJE PRZEGLADY ===');
-    writeln;
-    
-    (* Sprawdzamy czy plik w ogóle istnieje *)
-    if FileExists('przegl.txt') then
-      begin
-        assign(prz_plik, 'przegl.txt');
-        reset(prz_plik);
-        
-        (* Czytamy plik linijka po linijce dopóki nie osiągniemy końca *)
-        while not eof(prz_plik) do
-          begin
-            readln(prz_plik, prz_linia);
-            writeln(prz_linia);
-          end;
-          
-        close(prz_plik);
-      end
-    else
-      begin
-        writeln('Tworzenie nowego (pustego) dziennika...');
-        (* Tworzymy pusty plik, jeśli jeszcze go nie ma *)
-        assign(prz_plik, 'przegl.txt');
-        rewrite(prz_plik);
-        close(prz_plik);
-        writeln('Brak zaplanowanych prac na ten moment.');
-      end;
-      
-    writeln;
-    writeln('Nacisnij Enter, aby powrocic...');
-    readln;
-    goto przeglady;
-  end;
-
-{ 2. Dodawanie nowego wpisu }
-if prz_wyb = 2 then
-  begin
-    ClrScr;
-    writeln('=== DODAJ WPIS DO DZIENNIKA ===');
-    write('Podaj date (np. 21.12.2012): ');
-    readln(prz_data);
-    if prz_data = '0' then
-      begin
-        writeln('"0" to nie data. Jeszcze raz.');
-        writeln('Ustawiam date 21.12.2012');
-        prz_data := '21.12.2012';
-      end;
-    write('Podaj nazwe maszyny: ');
-    readln(prz_wpis);
-
-    write('Podaj aktualna liczbe mth ');
-    readln(prz_mth);
-    
-    (* Otwieramy plik w trybie Append - dopisywanie na koncu *)
-    assign(prz_plik, 'przegl.txt');
-    if FileExists('przegl.txt') then
-      append(prz_plik)
-    else
-      rewrite(prz_plik);
-      
-    writeln(prz_plik, '[', prz_data, '] - ', prz_wpis, ', ', prz_mth:0:1, ' mth');
-    close(prz_plik);
-    
-    writeln('Wpis zapisany pomyslnie!');
-    readln;
-    goto przeglady;
-  end;
-
-goto przeglady; (* Zabezpieczenie przed wyjściem w pustą przestrzeń *)
 
 kalkulator:
 { W przygotowaniu }
