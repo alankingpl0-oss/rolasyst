@@ -91,10 +91,10 @@ if ($LASTEXITCODE -ne 0) {
     Tworzenie katalogu docelowego - parametr -Force gwarantuje, że PowerShell
     nie wyłoży się, jeśli katalog 'bin' już istnieje w D:\prog\rolasyst\
 #>
-New-Item -ItemType Directory -Path "bin" -Force | Out-Null
+New-Item -ItemType Directory -Path "..\bin" -Force | Out-Null
 
 <# Kopiowanie gotowych plików wykonywalnych do bin\ #>
-Copy-Item *.exe, amiga_gospo, gospo, dos16, dos32 -Destination "bin\" -Force
+Copy-Item *.exe, amiga_gospo, gospo, dos16, dos32 -Destination "..\bin\" -Force
 
 <# Sprzątanie ze ścieżki głównej po skopiowaniu #>
 Remove-Item *.exe, amiga_gospo, dos16, dos32, gospo -ErrorAction SilentlyContinue
