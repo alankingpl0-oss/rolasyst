@@ -112,7 +112,7 @@ if menu = 4 then goto kalkulator;
 if menu = 5 then goto oplacalno;
 if menu = 6 then
   begin
-    dziennik-r.obsluga;
+    dziennik_r.obsluga;
   end;
 if menu = 0 then goto licz
 else
