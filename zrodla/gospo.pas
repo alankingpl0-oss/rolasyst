@@ -90,7 +90,8 @@ writeln('1. Przelicznik miar');
 writeln('2. Kalendarz');
 writeln('3. Hitoria przegladow');
 writeln('4. Kalkulator (zwiastun)');
-writeln('5. Oblicz oplacalnosc');
+writeln('5. Wskaznik oplacalnosci');
+writeln('6. Dziennik rolnika');
 writeln('0. Zacznij obliczenia');
 
 readln(menu);
@@ -109,6 +110,10 @@ if menu = 3 then
   end;
 if menu = 4 then goto kalkulator;
 if menu = 5 then goto oplacalno;
+if menu = 6 then
+  begin
+    dziennik-r.obsluga;
+  end;
 if menu = 0 then goto licz
 else
   begin
@@ -531,7 +536,7 @@ rewrite(plyk);
 writeln(plyk, '=== RAPORT ===');
 writeln(plyk, 'Potrzebne paliwo: ........................ ', wyn_pal:0:2, ' litrow');
 writeln(plyk, 'Potrzebny czas: .......................... ', Format('%d:%.2d', [g_godz, g_min]), ' godzin');
-writeln(plyk, 'Koszt paliwa: ............................ ', wyn_koszt:0:2 , 'przy cenie za litr PLN', cena_paliwa:0:2);
+writeln(plyk, 'Koszt paliwa: ............................ ', wyn_koszt:0:2 , ' przy cenie za litr PLN ', cena_paliwa:0:2);
 writeln(plyk, 'Pracownik: ............................... ', wyn_prac:0:2 , ' zl');
 writeln(plyk, 'Ostateczny koszt (w tym ukryte koszty): .. ', wyn_ost:0:2 , ' zl');
 
@@ -568,11 +573,12 @@ goto poczatek;
 { MENU DEBUG }
 
 debug:
-  writeln('=== MENU DEBUG ===');
-  writeln('v', wer, ' kompil', kompilacja);
+  writeln('=== MENU DEBUG ===')     ;
+  writeln('v', wer, ' kompil ', kompilacja);
   writeln('1. Iinformacje o wersji');
-  writeln('0. Powrot');
-  readln(debug_wybor);
+  writeln('2. Ramy')                ;
+  writeln('0. Powrot')              ;
+  readln(debug_wybor)               ;
   if debug_wybor = 0 then goto poczatek;
   if debug_wybor = 1 then
     begin
@@ -781,6 +787,6 @@ goto poczatek;
 
 
 koniec:
-writeln('Dziekujemy za skorzystanie z programu RolAsyst w wersji ', wer);
+writeln('Dziekujemy za skorzystanie z programu RolAsyst w wersji ', wer)
 
 end.
