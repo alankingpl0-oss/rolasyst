@@ -11,6 +11,7 @@ uses
   przeglady,
   kalendarz,
   dos,
+  dziennik_r,
   SysUtils;
 
 const
