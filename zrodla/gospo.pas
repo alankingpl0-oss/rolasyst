@@ -15,8 +15,8 @@ uses
   SysUtils;
 
 const
-  wer = '3.0.1 "Zle Mienso"';
-  kompilacja = '3.0.1';
+  wer = '3.0.2 "Zle Mienso"';
+  kompilacja = '3.0.2';
 
 label
   poczatek,
@@ -573,9 +573,9 @@ writeln(plyk, 'Ostateczny koszt (w tym ukryte koszty): .. ', wyn_ost:0:2 , ' zl'
 
 
 (* W Pascalu kazda linia tekstu powinna byc osobnym wywolaniem writeln *)
-writeln(plyk, 'Dane te sa wyliczony do typowych prac polowych,');
+writeln(plyk, 'Dane te sa wyliczone do typowych prac polowych,');
 writeln(plyk, 'jednak przy ciezkiej orce czy gliniastej');
-writeln(plyk, 'glebie zuzycie i wydajnosc moze ulec zmianie');
+writeln(plyk, 'glebie zuzycie i wydajnosc moze ulec zmianie.'); writeln;
 
 writeln(plyk); (* Jesli pusty wiersz mial byc w pliku, musimy przekazac zmienna plikowa *)
 close(plyk);
