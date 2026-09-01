@@ -15,8 +15,8 @@ uses
   SysUtils;
 
 const
-  wer = '3.0-beta3';
-  kompilacja = 'b3';
+  wer = '3.0.1 "Zle Mienso"';
+  kompilacja = '3.0.1';
 
 label
   poczatek,
@@ -24,7 +24,7 @@ label
   dalej,
   licz,
   {miary,}
-  {kalendarz,}
+  {kalendarz,}          {Zakomentowane, bo nie są jako tako potrzebne}
   {przeglady,}
   kalkulator,
   oplacalno,
@@ -39,7 +39,7 @@ var
   wyn_czas : Real;
   wydaj    : Real;
   plyk     : Text;
-  nazwa_pl : String;
+  nazwa_pl : String; { Nie ma nic wspólnego z hostingiem Nazwa.pl }
   wybor    : Integer; (* Zmienna do obslugi menu ciagnikow *)
   wybo2    : Char;
   cena_paliwa : Real;
@@ -221,6 +221,7 @@ writeln('6. Mercedes MB-Trac 800');
 writeln('7. Fendt 512 Vario');
 writeln('8. New Holland T5.90S');
 writeln('9. Case IH Maxxum 150');
+{writeln('10. Ursus 1224');}
 writeln('0. Inny (wpisz dane recznie)');
 writeln;
 write('Wybierz ciagnik (1-8, 0): ');
@@ -450,6 +451,34 @@ case wybor of
        end;
      end;
 
+     {Ursus 1224}
+ { 10:  begin
+       writeln('=== Praca dla Ursusa 1224 ===');
+       writeln('1. Lekka orka (agregat 6 m)');
+       writeln('2. Gleboka orka (agregat 7 m)');
+       writeln('3. Siew (agregat 3 m)');
+       writeln('4. Siew (agregat 6 m)');
+       writeln('5. Prasowanie / Class Rollant');
+       writeln('6. Nawozenie (agregat 15 m)');
+       write('Wybierz rodzaj pracy (1-4): ');
+       readln(wybor_prac);
+       
+       case wybor_prac of
+         1: begin zuzycie := 7.08  ; wydaj := 5.12  ; end;
+         2: begin zuzycie :=  9.04 ; wydaj := 4.71  ; end;
+         3: begin zuzycie := 12.21 ; wydaj := 2.86  ; end;
+         4: begin zuzycie := 15.90 ; wydaj := 4.91  ; end;
+         5: begin zuzycie := 54.98 ; wydaj := 11.22 ; end;
+         6: begin zuzycie := 49.02 ; wydaj := 16.47 ; end;
+         
+         else
+           begin
+             writeln('Nieznana praca! Ustawiam srednie parametry.');
+             zuzycie := 12.1; wydaj := 3.0;
+           end;
+       end;
+     end;
+}
 
 
   0: begin

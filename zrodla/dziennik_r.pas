@@ -51,12 +51,12 @@ if kal_wyb = 1 then
       end
     else
       begin
-        writeln('Tworzenie nowego (pustego) kalendarza...');
+        writeln('Tworzenie nowego (pustego) dziennika...');
         (* Tworzymy pusty plik, jeśli jeszcze go nie ma *)
         assign(kal_plik, 'dziennik.txt');
         rewrite(kal_plik);
         close(kal_plik);
-        writeln('Brak zaplanowanych prac na ten moment.');
+        writeln('Brak wydarzen na ten moment.');
       end;
       
     writeln;
@@ -69,7 +69,7 @@ if kal_wyb = 1 then
 if kal_wyb = 2 then
   begin
     ClrScr;
-    writeln('=== DODAJ WPIS DO KALENDARZA ===');
+    writeln('=== DODAJ WPIS DO DZIENNIKA ===');
     write('Podaj date (np. 21.12.2012): ');
     readln(kal_data);
     if kal_data = '0' then
@@ -78,12 +78,12 @@ if kal_wyb = 2 then
         writeln('Ustawiam koniec swiata');
         kal_data := '21.12.2012';
       end;
-    write('Podaj opis pracy (np. Koszenie C-360): ');
+    write('Podaj opis wydarzenia (np. Wigilia): ');
     readln(kal_wpis);
     
     (* Otwieramy plik w trybie Append - dopisywanie na koncu *)
-    assign(kal_plik, 'kalendarz.txt');
-    if FileExists('kalendarz.txt') then
+    assign(kal_plik, 'dziennik.txt');
+    if FileExists('dziennik.txt') then
       append(kal_plik)
     else
       rewrite(kal_plik);
@@ -96,7 +96,7 @@ if kal_wyb = 2 then
     goto dziennik;
   end;
 
-goto dziennik; (* Zabezpieczenie przed wyjściem w pustą przestrzeń *)
+Exit; (* Zabezpieczenie przed wyjściem w pustą przestrzeń *)
 
 end;
 end.
